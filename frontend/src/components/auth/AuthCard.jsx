@@ -129,8 +129,8 @@ export default function AuthCard({ tab, setTab }) {
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(data.user));
 
-      // Redirect to dashboard (or wherever the app should go after login)
-      navigate('/');
+      // Redirect to dashboard
+      navigate('/dashboard');
     } catch (err) {
       setError(err.message);
     } finally {
