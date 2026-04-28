@@ -2,13 +2,14 @@ import { useEffect, useState, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
   ArrowLeft, Users, Copy, Check, Trash2, Plus,
-  Crown, Loader2, AlertTriangle, Receipt, TrendingUp,
+  Crown, Loader2, AlertTriangle, Receipt, TrendingUp, Scale, ChevronRight,
 } from 'lucide-react';
 import Navbar from '../../components/layout/Navbar.jsx';
 import ExpenseCard from '../../components/expense/ExpenseCard.jsx';
 import AddExpenseModal from '../../components/expense/AddExpenseModal.jsx';
 import { getGroupById, deleteGroup } from '../../services/groupService.js';
 import { getExpensesByGroup } from '../../services/expenseService.js';
+import { getGroupBalance } from '../../services/balanceService.js';
 import { toast } from '../../components/common/Toast.jsx';
 
 function MemberRow({ member, isCreator }) {
@@ -43,6 +44,8 @@ export default function GroupDetail() {
   const [deleting, setDeleting] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [showAddExpense, setShowAddExpense] = useState(false);
+  const [balanceData, setBalanceData] = useState(null);
+  const [balanceLoading, setBalanceLoading] = useState(true);
 
   const currentUserId = (() => {
     try {
@@ -75,8 +78,25 @@ export default function GroupDetail() {
     }
   }, [id]);
 
+  const fetchBalance = useCallback(async () => {
+    setBalanceLoading(true);
+    try {
+      const data = await getGroupBalance(id);
+      setBalanceData(data);
+    } catch (err) {
+      console.error('Balance fetch error:', err);
+    } finally {
+      setBalanceLoading(false);
+    }
+  }, [id]);
+
   useEffect(() => { fetchGroup(); }, [fetchGroup]);
-  useEffect(() => { if (group) fetchExpenses(); }, [group, fetchExpenses]);
+  useEffect(() => { 
+    if (group) {
+      fetchExpenses();
+      fetchBalance();
+    }
+  }, [group, fetchExpenses, fetchBalance]);
 
   const handleCopyCode = async () => {
     if (!group?.inviteCode) return;
@@ -102,14 +122,18 @@ export default function GroupDetail() {
 
   const handleExpenseAdded = (expense) => {
     setExpenses((prev) => [expense, ...prev]);
+    fetchBalance(); // Refresh balances when expense is added
   };
 
   const handleExpenseDeleted = (expenseId) => {
     setExpenses((prev) => prev.filter((e) => e._id !== expenseId));
+    fetchBalance(); // Refresh balances when expense is deleted
   };
 
   const isCreator = group?.createdBy?._id === currentUserId;
   const totalExpenses = expenses.reduce((sum, e) => sum + e.amount, 0);
+
+  const myNetBalance = balanceData?.balances?.find(b => b.user._id === currentUserId)?.netBalance || 0;
 
   /* ── Loading ── */
   if (loading) {
@@ -190,6 +214,36 @@ export default function GroupDetail() {
           <div className="rounded-xl bg-[#1E293B] border border-[#334155] p-4 text-center">
             <p className="text-2xl font-bold text-indigo-400">₹{totalExpenses.toFixed(0)}</p>
             <p className="text-[10px] text-[#64748B] mt-1 font-medium uppercase tracking-wider">Total Spent</p>
+          </div>
+        </div>
+
+        {/* Balance Summary & Navigation */}
+        <div 
+          onClick={() => navigate(`/balance/${id}`)}
+          className="rounded-2xl bg-[#1E293B] border border-[#334155] p-5 mb-6 flex items-center justify-between hover:border-indigo-500/50 hover:bg-[#232F46] transition-all cursor-pointer group/balance"
+        >
+          <div className="flex items-center gap-4">
+            <div className="p-3 rounded-xl bg-indigo-500/10 border border-indigo-500/20 group-hover/balance:scale-110 transition-transform">
+              <Scale className="w-6 h-6 text-indigo-400" />
+            </div>
+            <div>
+              <p className="text-sm font-bold text-white">Group Balances</p>
+              {balanceLoading ? (
+                <div className="h-4 w-24 bg-[#0F172A] rounded animate-pulse mt-1" />
+              ) : (
+                <p className={`text-xs font-medium mt-0.5 ${myNetBalance > 0 ? 'text-emerald-400' : myNetBalance < 0 ? 'text-rose-400' : 'text-[#64748B]'}`}>
+                  {myNetBalance > 0 
+                    ? `You are owed ₹${myNetBalance.toFixed(2)}` 
+                    : myNetBalance < 0 
+                    ? `You owe ₹${Math.abs(myNetBalance).toFixed(2)}` 
+                    : 'You are all settled up'}
+                </p>
+              )}
+            </div>
+          </div>
+          <div className="flex items-center gap-2 text-indigo-400 font-semibold text-xs uppercase tracking-widest">
+            View Details
+            <ChevronRight className="w-4 h-4 group-hover/balance:translate-x-1 transition-transform" />
           </div>
         </div>
 
