@@ -116,3 +116,23 @@ export const deleteExpense = asyncHandler(async (req, res) => {
   await expense.deleteOne();
   res.json({ message: 'Expense deleted' });
 });
+
+/**
+ * GET /api/expenses/recent
+ * Returns the 10 most recent expenses across all groups the user belongs to.
+ */
+export const getRecentExpenses = asyncHandler(async (req, res) => {
+  const userId = req.user._id;
+
+  // Find groups user is member of
+  const groups = await Group.find({ members: userId });
+  const groupIds = groups.map(g => g._id);
+
+  const expenses = await Expense.find({ groupId: { $in: groupIds } })
+    .sort({ createdAt: -1 })
+    .limit(10)
+    .populate('paidBy', 'name')
+    .populate('groupId', 'name');
+
+  res.json(expenses);
+});

@@ -4,11 +4,13 @@ import {
   createExpense,
   getExpensesByGroup,
   deleteExpense,
+  getRecentExpenses,
 } from '../controllers/expenseController.js';
 
 const router = express.Router();
 
 router.post('/', protect, createExpense);
+router.get('/recent', protect, getRecentExpenses);
 router.get('/:groupId', protect, getExpensesByGroup);
 router.delete('/:id', protect, deleteExpense);
 
