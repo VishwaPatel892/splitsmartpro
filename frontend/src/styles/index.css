@@ -16,6 +16,22 @@
       -webkit-text-fill-color: #F8FAFC !important;
       transition: background-color 5000s ease-in-out 0s;
   }
+
+  /* Custom Scrollbar for premium feel */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 10px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #475569;
+  }
 }
 
 @layer utilities {

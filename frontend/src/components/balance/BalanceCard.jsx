@@ -91,23 +91,44 @@ function SettlementCard({ from, to, amount, currentUserId, onSettle }) {
   }
 
   return (
-    <div className={`rounded-xl border ${borderColor} ${bg} p-4 flex items-center justify-between gap-4 transition-all hover:scale-[1.01]`}>
+    <div className={`rounded-xl border ${borderColor} ${bg} p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all hover:scale-[1.01]`}>
       <div className="flex-1 min-w-0">
         <p className="text-sm font-bold text-white">{heading}</p>
         <p className="text-xs text-[#64748B] mt-0.5">{subtext}</p>
+        <p className={`text-xl font-black mt-2 ${amountColor}`}>₹{amount.toFixed(2)}</p>
       </div>
       
-      <div className="flex items-center gap-4 shrink-0">
-        <p className={`text-base font-bold ${amountColor}`}>₹{amount.toFixed(2)}</p>
-        {onSettle && (
+      <div className="flex items-center gap-2 shrink-0 w-full sm:w-auto">
+        {onSettle && youPay && (
           <button
-            onClick={(e) => {
-              e.stopPropagation();
-              onSettle();
-            }}
-            className="px-3 py-1.5 rounded-lg bg-indigo-600 text-white text-[10px] font-bold uppercase tracking-wider hover:bg-indigo-500 transition-all active:scale-95 shadow-lg shadow-indigo-500/20"
+            onClick={(e) => { e.stopPropagation(); onSettle(); }}
+            className="flex-1 sm:flex-none px-4 py-2 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 text-white text-xs font-bold uppercase tracking-widest hover:-translate-y-0.5 transition-all shadow-lg shadow-emerald-500/25 active:scale-95 text-center"
           >
-            Settle
+            Pay Now
+          </button>
+        )}
+        {onSettle && youReceive && (
+          <>
+            <button
+              onClick={(e) => { e.stopPropagation(); toast('Payment request sent!', 'info'); }}
+              className="flex-1 sm:flex-none px-4 py-2 rounded-xl border border-indigo-500/30 text-indigo-400 text-xs font-bold uppercase tracking-widest hover:bg-indigo-500/10 transition-all active:scale-95 text-center"
+            >
+              Request
+            </button>
+            <button
+              onClick={(e) => { e.stopPropagation(); onSettle(); }}
+              className="flex-1 sm:flex-none px-4 py-2 rounded-xl bg-[#1E293B] border border-[#334155] text-white text-xs font-bold uppercase tracking-widest hover:bg-[#334155] transition-all active:scale-95 text-center"
+            >
+              Mark as Paid
+            </button>
+          </>
+        )}
+        {onSettle && !youPay && !youReceive && (
+          <button
+            onClick={(e) => { e.stopPropagation(); onSettle(); }}
+            className="flex-1 sm:flex-none px-4 py-2 rounded-xl bg-[#1E293B] border border-[#334155] text-[#94A3B8] text-xs font-bold uppercase tracking-widest hover:text-white hover:bg-[#334155] transition-all active:scale-95 text-center"
+          >
+            Mark Settled
           </button>
         )}
       </div>

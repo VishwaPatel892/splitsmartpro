@@ -138,7 +138,7 @@ export const getActivityFeed = asyncHandler(async (req, res) => {
       id: e._id,
       type: 'expense',
       user: e.paidBy.name,
-      action: `added "₹${e.amount.toFixed(2)}" in "${e.groupId.name}"`,
+      action: `added ₹${e.amount.toFixed(2)} in ${e.groupId.name}`,
       title: e.title,
       amount: e.amount,
       createdAt: e.createdAt,
@@ -147,7 +147,7 @@ export const getActivityFeed = asyncHandler(async (req, res) => {
       id: s._id,
       type: 'settlement',
       user: s.fromUser.name,
-      action: `settled "₹${s.amount.toFixed(2)}" with ${s.toUser.name} in "${s.groupId.name}"`,
+      action: `settled ₹${s.amount.toFixed(2)} with ${s.toUser.name} in ${s.groupId.name}`,
       amount: s.amount,
       createdAt: s.createdAt,
     }))

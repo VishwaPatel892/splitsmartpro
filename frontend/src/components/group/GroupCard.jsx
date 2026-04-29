@@ -72,13 +72,11 @@ export default function GroupCard({ group, index = 0, onDelete, isCreator }) {
           )}
         </div>
 
-        <span className="text-xs text-[#64748B] font-medium">
-          {group.members.length} member{group.members.length !== 1 ? 's' : ''}
-        </span>
+        <div className="flex items-center gap-1.5 text-xs text-[#64748B] font-medium group-hover:text-[#94A3B8] transition-colors">
+          <span>{group.members.length} member{group.members.length !== 1 ? 's' : ''}</span>
+          <ArrowRight className="w-4 h-4 text-white/20 group-hover:text-white/60 group-hover:translate-x-1 transition-all duration-200" />
+        </div>
       </div>
-
-      {/* Hover arrow */}
-      <ArrowRight className="absolute bottom-5 right-5 w-4 h-4 text-white/20 group-hover:text-white/60 group-hover:translate-x-1 transition-all duration-200" />
     </div>
   );
 }

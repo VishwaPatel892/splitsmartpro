@@ -58,7 +58,7 @@ export default function ActivityFeed() {
         <div className="absolute left-2.5 top-0 bottom-0 w-px bg-[#334155]" />
         
         {activities.map((activity) => (
-          <div key={activity.id} className="relative flex items-start gap-4 pl-1 group cursor-pointer hover:bg-white/[0.02] p-2 -ml-2 rounded-xl transition-all">
+          <div key={activity.id} className="relative flex items-start gap-4 group cursor-pointer hover:bg-white/[0.02] p-2 -ml-2 rounded-xl transition-all">
             <div className={`mt-1 z-10 w-5 h-5 rounded-full ${getColor(activity.type)} flex items-center justify-center text-white ring-4 ring-[#1E293B] group-hover:scale-110 transition-transform shadow-lg shadow-black/20`}>
               {getIcon(activity.type)}
             </div>
