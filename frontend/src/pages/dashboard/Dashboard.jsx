@@ -9,25 +9,66 @@ import ExpenseList from '../../components/dashboard/ExpenseList';
 import GroupList from '../../components/dashboard/GroupList';
 import ActivityFeed from '../../components/dashboard/ActivityFeed';
 import Insights from '../../components/dashboard/Insights';
+import SettlementHistory from '../../components/dashboard/SettlementHistory';
 import { getUserSummary } from '../../services/balanceService.js';
+import { getGroups } from '../../services/groupService.js';
+import AddExpenseModal from '../../components/expense/AddExpenseModal.jsx';
+import SelectGroupModal from '../../components/dashboard/SelectGroupModal.jsx';
+import { toast } from '../../components/common/Toast.jsx';
+import { useNavigate } from 'react-router-dom';
 
 export default function Dashboard() {
   const [summary, setSummary] = useState(null);
+  const [groups, setGroups] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isSelectModalOpen, setIsSelectModalOpen] = useState(false);
+  const [isAddExpenseOpen, setIsAddExpenseOpen] = useState(false);
+  const [selectedGroup, setSelectedGroup] = useState(null);
+  const [actionType, setActionType] = useState(''); // 'add' or 'settle'
+  
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchSummary = async () => {
+    const fetchData = async () => {
       try {
-        const data = await getUserSummary();
-        setSummary(data);
+        const [summaryData, groupsData] = await Promise.all([
+          getUserSummary(),
+          getGroups()
+        ]);
+        setSummary(summaryData);
+        setGroups(groupsData);
       } catch (err) {
-        console.error('Failed to fetch summary:', err);
+        console.error('Failed to fetch dashboard data:', err);
       } finally {
         setIsLoading(false);
       }
     };
-    fetchSummary();
+    fetchData();
   }, []);
+
+  const handleActionClick = (type) => {
+    if (groups.length === 0) {
+      toast('Create a group first!', 'info');
+      return;
+    }
+    
+    setActionType(type);
+    if (groups.length === 1) {
+      handleGroupSelect(groups[0], type);
+    } else {
+      setIsSelectModalOpen(true);
+    }
+  };
+
+  const handleGroupSelect = (group, type = actionType) => {
+    setIsSelectModalOpen(false);
+    if (type === 'add') {
+      setSelectedGroup(group);
+      setIsAddExpenseOpen(true);
+    } else if (type === 'settle') {
+      navigate(`/settle/${group._id}`);
+    }
+  };
 
   if (isLoading) {
     return (
@@ -114,7 +155,10 @@ export default function Dashboard() {
         </div>
 
         {/* Quick Actions */}
-        <QuickActions />
+        <QuickActions 
+          onAddExpense={() => handleActionClick('add')} 
+          onSettleUp={() => handleActionClick('settle')} 
+        />
 
         {/* Main Grid Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -132,35 +176,40 @@ export default function Dashboard() {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <ExpenseList />
-              <GroupList />
+              <SettlementHistory />
             </div>
           </div>
 
-          {/* Right Column (Activity & Side Panel) */}
+          {/* Right Column (Activity & Groups) */}
           <div className="lg:col-span-4 space-y-8 h-full">
-            <div className="min-h-[380px] lg:h-full">
-               <ActivityFeed />
-            </div>
-            
-            {/* Promo Card */}
-            <div className="rounded-2xl bg-[#1E293B] border border-[#334155] p-6 relative overflow-hidden group cursor-pointer hover:border-indigo-500/50 transition-all active:scale-[0.98]">
-              <div className="absolute -right-8 -bottom-8 w-32 h-32 bg-indigo-500/10 rounded-full blur-2xl group-hover:bg-indigo-500/20 transition-all" />
-              <h4 className="text-sm font-bold text-white mb-2 relative z-10">Smart Split™ Enabled</h4>
-              <p className="text-xs text-[#94A3B8] leading-relaxed relative z-10">
-                Our algorithm just simplified debts across your groups, saving you transactions.
-              </p>
-              <button 
-                onClick={() => navigate('/groups')}
-                className="mt-4 text-xs font-bold text-indigo-400 hover:text-indigo-300 transition-colors flex items-center gap-1 group/btn"
-              >
-                View Your Groups <ChevronRight className="w-3 h-3 group-hover/btn:translate-x-1 transition-transform" />
-              </button>
-            </div>
+            <GroupList />
+            <ActivityFeed />
           </div>
 
         </div>
 
       </main>
+
+      {/* Modals */}
+      {isSelectModalOpen && (
+        <SelectGroupModal
+          title={actionType === 'add' ? 'Add Expense To...' : 'Settle Up In...'}
+          groups={groups}
+          onClose={() => setIsSelectModalOpen(false)}
+          onSelect={handleGroupSelect}
+        />
+      )}
+
+      {isAddExpenseOpen && selectedGroup && (
+        <AddExpenseModal
+          group={selectedGroup}
+          onClose={() => setIsAddExpenseOpen(false)}
+          onAdded={() => {
+            // Refresh summary after adding expense
+            getUserSummary().then(setSummary);
+          }}
+        />
+      )}
     </div>
   );
 }

@@ -105,3 +105,56 @@ export const getUserSummary = asyncHandler(async (req, res) => {
     groupCount: groups.length
   });
 });
+
+/**
+ * GET /api/balance/activity
+ * Returns recent activity (expenses and settlements) for the user.
+ */
+export const getActivityFeed = asyncHandler(async (req, res) => {
+  const userId = req.user._id;
+
+  // Find all groups user belongs to
+  const groups = await Group.find({ members: userId });
+  const groupIds = groups.map(g => g._id);
+
+  // Fetch recent expenses
+  const expenses = await Expense.find({ groupId: { $in: groupIds } })
+    .sort({ createdAt: -1 })
+    .limit(10)
+    .populate('paidBy', 'name')
+    .populate('groupId', 'name');
+
+  // Fetch recent settlements
+  const settlements = await Settlement.find({ groupId: { $in: groupIds }, status: 'completed' })
+    .sort({ createdAt: -1 })
+    .limit(10)
+    .populate('fromUser', 'name')
+    .populate('toUser', 'name')
+    .populate('groupId', 'name');
+
+  // Format and combine
+  const activity = [
+    ...expenses.map(e => ({
+      id: e._id,
+      type: 'expense',
+      user: e.paidBy.name,
+      action: `added "₹${e.amount.toFixed(2)}" in "${e.groupId.name}"`,
+      title: e.title,
+      amount: e.amount,
+      createdAt: e.createdAt,
+    })),
+    ...settlements.map(s => ({
+      id: s._id,
+      type: 'settlement',
+      user: s.fromUser.name,
+      action: `settled "₹${s.amount.toFixed(2)}" with ${s.toUser.name} in "${s.groupId.name}"`,
+      amount: s.amount,
+      createdAt: s.createdAt,
+    }))
+  ];
+
+  // Sort combined activity by date
+  activity.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+  res.json(activity.slice(0, 15));
+});

@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Plus, Users, Receipt, ArrowUpRight } from 'lucide-react';
 
-export default function QuickActions() {
+export default function QuickActions({ onAddExpense, onSettleUp }) {
   const navigate = useNavigate();
 
   const actions = [
@@ -9,7 +9,7 @@ export default function QuickActions() {
       name: 'Add Expense',
       icon: <Plus className="w-5 h-5" />,
       color: 'bg-indigo-600 hover:bg-indigo-500 shadow-indigo-500/30',
-      onClick: () => {},           // Phase 4
+      onClick: onAddExpense,
     },
     {
       name: 'My Groups',
@@ -21,7 +21,7 @@ export default function QuickActions() {
       name: 'Settle Up',
       icon: <Receipt className="w-5 h-5" />,
       color: 'bg-[#0F172A] border border-[#334155] hover:border-emerald-500/50',
-      onClick: () => {},           // Phase 4
+      onClick: onSettleUp,
     },
   ];
 

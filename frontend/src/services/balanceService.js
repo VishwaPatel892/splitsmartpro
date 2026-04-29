@@ -16,3 +16,11 @@ export const getUserSummary = async () => {
   const res = await api.get('/balance/summary');
   return res.data;
 };
+
+/**
+ * Get recent activity feed (global)
+ */
+export const getActivityFeed = async () => {
+  const res = await api.get('/balance/activity');
+  return res.data;
+};

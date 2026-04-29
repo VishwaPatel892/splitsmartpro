@@ -72,3 +72,27 @@ export const getSettlementsByGroup = asyncHandler(async (req, res) => {
 
   res.json(settlements);
 });
+
+/**
+ * GET /api/settlements/recent
+ * Returns the 10 most recent settlements across all groups the user belongs to.
+ */
+export const getRecentSettlements = asyncHandler(async (req, res) => {
+  const userId = req.user._id;
+
+  // Find groups user is member of
+  const groups = await Group.find({ members: userId });
+  const groupIds = groups.map(g => g._id);
+
+  const settlements = await Settlement.find({ 
+    groupId: { $in: groupIds },
+    status: 'completed'
+  })
+    .sort({ createdAt: -1 })
+    .limit(10)
+    .populate('fromUser', 'name')
+    .populate('toUser', 'name')
+    .populate('groupId', 'name');
+
+  res.json(settlements);
+});
