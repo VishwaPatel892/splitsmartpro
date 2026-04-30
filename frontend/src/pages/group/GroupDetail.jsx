@@ -92,7 +92,7 @@ function BalanceTab({ balanceData, currentUserId, onSettleClick }) {
                 <p className="text-sm font-medium text-[#E2E8F0]">{b.user._id === currentUserId ? 'You' : b.user.name}</p>
               </div>
               <p className={`text-sm font-bold ${b.netBalance > 0 ? 'text-emerald-400' : b.netBalance < 0 ? 'text-rose-400' : 'text-[#64748B]'}`}>
-                {b.netBalance > 0 ? `+₹${b.netBalance.toFixed(2)}` : b.netBalance < 0 ? `-₹${Math.abs(b.netBalance).toFixed(2)}` : formatCurrency(0)}
+                {b.netBalance > 0 ? `+ ${formatCurrency(b.netBalance)}` : b.netBalance < 0 ? `- ${formatCurrency(Math.abs(b.netBalance))}` : formatCurrency(0)}
               </p>
             </div>
           ))}
@@ -108,14 +108,14 @@ function ActivityTab({ expenses, settlements, currentUserId }) {
       id: e._id,
       type: 'expense',
       date: new Date(e.createdAt),
-      text: `${e.paidBy._id === currentUserId ? 'You' : e.paidBy.name} added ₹${e.amount.toFixed(2)} for ${e.title}`,
+      text: `${e.paidBy._id === currentUserId ? 'You' : e.paidBy.name} added ${formatCurrency(e.amount)} for ${e.title}`,
       tag: e.splitType
     })),
     ...settlements.map(s => ({
       id: s._id,
       type: 'settlement',
       date: new Date(s.createdAt),
-      text: `${s.fromUser._id === currentUserId ? 'You' : s.fromUser.name} settled ₹${s.amount.toFixed(2)} with ${s.toUser._id === currentUserId ? 'You' : s.toUser.name}`,
+      text: `${s.fromUser._id === currentUserId ? 'You' : s.fromUser.name} settled ${formatCurrency(s.amount)} with ${s.toUser._id === currentUserId ? 'You' : s.toUser.name}`,
     }))
   ].sort((a, b) => b.date - a.date);
 
@@ -301,7 +301,7 @@ export default function GroupDetail() {
             <div className="sm:text-right shrink-0">
               <p className="text-xs font-bold text-[#64748B] uppercase tracking-widest mb-1">Total Group Spend</p>
               <p className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-violet-400">
-                ₹{totalExpenses.toFixed(0)}
+                {formatCurrency(totalExpenses)}
               </p>
             </div>
           </div>

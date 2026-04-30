@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { CheckCircle2, ArrowRight, History, Loader2, IndianRupee } from 'lucide-react';
 import api from '../../services/api';
 
-export default function SettlementHistory() {
+export default function SettlementHistory({ refreshKey }) {
   const [settlements, setSettlements] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -12,7 +12,7 @@ export default function SettlementHistory() {
       .then(res => setSettlements(res.data))
       .catch(() => setSettlements([]))
       .finally(() => setLoading(false));
-  }, []);
+  }, [refreshKey]);
 
   return (
     <div className="bg-[#1E293B] border border-[#334155] rounded-2xl p-6 h-full flex flex-col">

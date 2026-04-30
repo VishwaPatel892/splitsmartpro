@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Plus, Check, UserPlus, Loader2, Receipt, ArrowRightLeft } from 'lucide-react';
 import { getActivityFeed } from '../../services/balanceService.js';
+import { formatCurrency } from '../../utils/currencyUtils.js';
 
-export default function ActivityFeed() {
+export default function ActivityFeed({ refreshKey }) {
   const [activities, setActivities] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -11,7 +12,7 @@ export default function ActivityFeed() {
       .then(setActivities)
       .catch(() => setActivities([]))
       .finally(() => setLoading(false));
-  }, []);
+  }, [refreshKey]);
 
   const getIcon = (type) => {
     switch (type) {
@@ -40,6 +41,12 @@ export default function ActivityFeed() {
     return date.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' });
   };
 
+  const renderAction = (action, amount) => {
+    if (!amount) return action;
+    const amountRegex = new RegExp(`${amount.toFixed(2)}`);
+    return action.replace(amountRegex, formatCurrency(amount));
+  };
+
   return (
     <div className="bg-[#1E293B] border border-[#334155] rounded-2xl p-6 flex-1 flex flex-col min-h-0">
       <h3 className="text-lg font-bold text-[#F8FAFC] mb-6 flex items-center justify-between">
@@ -64,7 +71,7 @@ export default function ActivityFeed() {
             </div>
             <div className="flex-1">
               <p className="text-sm text-[#CBD5E1] group-hover:text-white transition-colors">
-                <span className="font-bold text-[#F8FAFC]">{activity.user === 'You' ? 'You' : activity.user}</span> {activity.action}
+                <span className="font-bold text-[#F8FAFC]">{activity.user === 'You' ? 'You' : activity.user}</span> {renderAction(activity.action, activity.amount)}
               </p>
               <p className="text-[10px] text-[#64748B] font-bold uppercase tracking-wider mt-0.5 group-hover:text-indigo-400 transition-colors">
                 {formatTime(activity.createdAt)}

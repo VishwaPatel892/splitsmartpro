@@ -73,13 +73,13 @@ function SettlementCard({ from, to, amount, currentUserId, onSettle }) {
 
   if (youPay) {
     heading     = `Pay ${to.name}`;
-    subtext     = `You owe ₹${amount.toFixed(2)}`;
+    subtext     = `You owe ${formatCurrency(amount)}`;
     borderColor = 'border-rose-500/25';
     bg          = 'bg-rose-500/5';
     amountColor = 'text-rose-300';
   } else if (youReceive) {
     heading     = `Collect from ${from.name}`;
-    subtext     = `Owes you ₹${amount.toFixed(2)}`;
+    subtext     = `Owes you ${formatCurrency(amount)}`;
     borderColor = 'border-emerald-500/25';
     bg          = 'bg-emerald-500/5';
     amountColor = 'text-emerald-300';
