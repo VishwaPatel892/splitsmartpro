@@ -29,9 +29,21 @@ export default function ProPlan() {
     }
 
     const amount = isAnnual ? 199 : 249;
+    const razorpayKey = 'rzp_test_dummy_key'; // Replace with your real test key
+
+    // If using the dummy key, simulate a successful payment instead of crashing the Razorpay SDK
+    if (razorpayKey === 'rzp_test_dummy_key') {
+      setTimeout(() => {
+        toast('Demo Payment Successful! Welcome to Pro.', 'success');
+        trackEvent('Subscription', 'Upgrade', isAnnual ? 'Annual' : 'Monthly', amount);
+        setLoading(false);
+        navigate('/dashboard');
+      }, 1500);
+      return;
+    }
 
     const options = {
-      key: 'rzp_test_dummy_key', // Mock key for demo purposes
+      key: razorpayKey,
       amount: amount * 100, // amount in paisa
       currency: 'INR',
       name: 'SplitSmart Pro',
