@@ -41,13 +41,13 @@ export default function ActivityFeed() {
   };
 
   return (
-    <div className="bg-[#1E293B] border border-[#334155] rounded-2xl p-6 h-full flex flex-col">
+    <div className="bg-[#1E293B] border border-[#334155] rounded-2xl p-6 flex-1 flex flex-col min-h-0">
       <h3 className="text-lg font-bold text-[#F8FAFC] mb-6 flex items-center justify-between">
         Real-time Activity
         {loading && <Loader2 className="w-4 h-4 animate-spin text-indigo-400" />}
       </h3>
       
-      <div className="space-y-6 relative flex-1 overflow-y-auto pr-2 custom-scrollbar">
+      <div className="space-y-6 relative flex-1 overflow-y-auto pr-2 custom-scrollbar min-h-0">
         {!loading && activities.length === 0 && (
           <div className="flex flex-col items-center justify-center py-10 opacity-50">
             <ArrowRightLeft className="w-10 h-10 mb-3" />

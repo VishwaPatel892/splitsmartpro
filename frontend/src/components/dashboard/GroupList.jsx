@@ -24,7 +24,7 @@ export default function GroupList() {
   }, []);
 
   return (
-    <div className="bg-[#1E293B] border border-[#334155] rounded-2xl p-6 flex flex-col h-full">
+    <div className="bg-[#1E293B] border border-[#334155] rounded-2xl p-6 flex flex-col">
       <div className="flex justify-between items-center mb-5">
         <h3 className="text-base font-bold text-[#F8FAFC]">Active Groups</h3>
         <button

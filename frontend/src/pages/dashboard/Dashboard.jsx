@@ -138,7 +138,10 @@ export default function Dashboard() {
             trend="To Pay" 
             description="Pending settlements"
           />
-          <div className="bg-gradient-to-br from-indigo-600 to-violet-700 rounded-2xl p-6 shadow-xl shadow-indigo-500/20 flex flex-col justify-between group cursor-pointer hover:scale-[1.02] hover:shadow-indigo-500/40 active:scale-[0.98] transition-all">
+          <div 
+            onClick={() => navigate('/pro')}
+            className="bg-gradient-to-br from-indigo-600 to-violet-700 rounded-2xl p-6 shadow-xl shadow-indigo-500/20 flex flex-col justify-between group cursor-pointer hover:scale-[1.02] hover:shadow-indigo-500/40 active:scale-[0.98] transition-all"
+          >
              <div className="flex justify-between items-start">
                <div className="p-2 rounded-xl bg-white/20">
                  <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -161,7 +164,7 @@ export default function Dashboard() {
         />
 
         {/* Main Grid Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           
           {/* Left Column (Charts & Expenses) */}
           <div className="lg:col-span-8 space-y-8">
@@ -181,7 +184,7 @@ export default function Dashboard() {
           </div>
 
           {/* Right Column (Activity & Groups) */}
-          <div className="lg:col-span-4 space-y-8 h-full">
+          <div className="lg:col-span-4 flex flex-col gap-8">
             <GroupList />
             <ActivityFeed />
           </div>

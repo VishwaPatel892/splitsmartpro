@@ -46,10 +46,10 @@ export default function Navbar() {
         {/* User Profile / Notifications */}
         <div className="flex items-center gap-3 pl-4 border-l border-[#334155]">
            <NotificationPanel />
-           <div className="w-8 h-8 rounded-full bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center text-indigo-300 font-bold text-xs uppercase">
+           <Link to="/settings" className="w-8 h-8 rounded-full bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center text-indigo-300 font-bold text-xs uppercase hover:bg-indigo-500/30 hover:scale-105 transition-all cursor-pointer" title="Settings">
              {user?.name ? user.name[0] : 'U'}
-           </div>
-           <button onClick={handleLogout} className="text-xs font-semibold text-[#94A3B8] hover:text-rose-400 transition-colors">
+           </Link>
+           <button onClick={handleLogout} className="hidden sm:block text-xs font-semibold text-[#94A3B8] hover:text-rose-400 transition-colors">
              Logout
            </button>
         </div>

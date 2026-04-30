@@ -50,3 +50,14 @@
     50%       { opacity: 0.75; }
   }
 }
+
+/* --- Light Mode Invert Trick --- */
+html.light-theme {
+  filter: invert(1) hue-rotate(180deg);
+}
+
+html.light-theme img,
+html.light-theme video,
+html.light-theme .no-invert {
+  filter: invert(1) hue-rotate(180deg);
+}
