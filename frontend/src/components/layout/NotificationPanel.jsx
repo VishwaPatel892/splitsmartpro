@@ -7,6 +7,7 @@ import { Bell, Check, DollarSign, Users, Receipt, CheckCircle2 } from 'lucide-re
 
 export default function NotificationPanel() {
   const [isOpen, setIsOpen] = useState(false);
+  const [filter, setFilter] = useState('all'); // all | payments | groups
   const navigate = useNavigate();
 
   const DUMMY_NOTIFICATIONS = [
