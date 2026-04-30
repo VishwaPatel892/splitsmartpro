@@ -1,12 +1,64 @@
 import { formatCurrency, getCurrencySymbol } from '../../utils/currencyUtils.js';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CheckCircle2, Zap, ArrowLeft, Star, Shield, PieChart, Sparkles, Download } from 'lucide-react';
-import Navbar from '../../components/layout/Navbar';
+import { CheckCircle2, Zap, ArrowLeft, Star, Shield, PieChart, Sparkles, Download, Loader2 } from 'lucide-react';
+import Navbar from '../../components/layout/Navbar.jsx';
+import { loadRazorpayScript } from '../../utils/loadRazorpay.js';
+import { toast } from '../../components/common/Toast.jsx';
+import PageSEO from '../../components/common/PageSEO.jsx';
+import { trackEvent } from '../../utils/analytics.js';
 
 export default function ProPlan() {
   const navigate = useNavigate();
   const [isAnnual, setIsAnnual] = useState(true);
+  const [loading, setLoading] = useState(false);
+
+  const user = (() => {
+    try { return JSON.parse(localStorage.getItem('splitsmart_user') || localStorage.getItem('user') || '{}'); }
+    catch { return {}; }
+  })();
+
+  const handleUpgrade = async () => {
+    setLoading(true);
+    const res = await loadRazorpayScript();
+    
+    if (!res) {
+      toast('Payment gateway failed to load. Are you offline?', 'error');
+      setLoading(false);
+      return;
+    }
+
+    const amount = isAnnual ? 199 : 249;
+
+    const options = {
+      key: 'rzp_test_dummy_key', // Mock key for demo purposes
+      amount: amount * 100, // amount in paisa
+      currency: 'INR',
+      name: 'SplitSmart Pro',
+      description: `${isAnnual ? 'Annual' : 'Monthly'} Subscription`,
+      image: '/favicon.svg',
+      handler: function (response) {
+        toast(`Payment Successful! Welcome to Pro.`, 'success');
+        trackEvent('Subscription', 'Upgrade', isAnnual ? 'Annual' : 'Monthly', amount);
+        navigate('/dashboard');
+      },
+      prefill: {
+        name: user.name || 'SplitSmart User',
+        email: user.email || 'user@example.com',
+      },
+      theme: {
+        color: '#4F46E5' // Indigo-600
+      }
+    };
+
+    const paymentObject = new window.Razorpay(options);
+    paymentObject.on('payment.failed', function () {
+      toast('Payment Failed. Please try again.', 'error');
+    });
+    
+    paymentObject.open();
+    setLoading(false);
+  };
 
   const features = [
     { name: 'Unlimited Groups', free: true, pro: true },
@@ -19,6 +71,7 @@ export default function ProPlan() {
 
   return (
     <div className="min-h-screen bg-[#0F172A] text-[#F8FAFC] font-sans pb-24">
+      <PageSEO title="Upgrade to Pro" description="Get advanced analytics and AI insights with SplitSmart Pro." path="/pro" />
       <Navbar />
 
       <main className="max-w-6xl mx-auto px-6 pt-28">
@@ -114,8 +167,12 @@ export default function ProPlan() {
               ))}
             </ul>
             
-            <button className="w-full py-4 rounded-xl bg-indigo-600 text-white font-bold shadow-lg shadow-indigo-600/25 hover:shadow-indigo-600/40 hover:-translate-y-0.5 active:translate-y-0 transition-all relative z-10">
-              Upgrade to Pro
+            <button 
+              onClick={handleUpgrade}
+              disabled={loading}
+              className="w-full py-4 rounded-xl bg-indigo-600 text-white font-bold shadow-lg shadow-indigo-600/25 hover:shadow-indigo-600/40 hover:-translate-y-0.5 active:translate-y-0 transition-all relative z-10 disabled:opacity-50 disabled:pointer-events-none flex items-center justify-center gap-2"
+            >
+              {loading ? <Loader2 className="w-5 h-5 animate-spin" /> : 'Upgrade to Pro'}
             </button>
           </div>
         </div>
