@@ -1,3 +1,4 @@
+import { formatCurrency, getCurrencySymbol } from '../../utils/currencyUtils.js';
 import { useEffect, useState, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { 
@@ -162,7 +163,7 @@ export default function Settle() {
                     </p>
                   </div>
                   <div className="text-right">
-                    <p className="text-sm font-bold text-emerald-400">₹{h.amount.toFixed(2)}</p>
+                    <p className="text-sm font-bold text-emerald-400">{formatCurrency(h.amount)}</p>
                     <span className="text-[9px] font-bold uppercase tracking-widest text-emerald-500/50">Completed</span>
                   </div>
                 </div>

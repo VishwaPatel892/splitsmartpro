@@ -130,6 +130,7 @@ export default function Dashboard() {
             type="positive" 
             trend="Collect" 
             description={`From ${summary?.groupCount || 0} groups`}
+            onClick={() => handleActionClick('settle')}
           />
           <StatCard 
             title="You Owe" 
@@ -137,6 +138,7 @@ export default function Dashboard() {
             type="negative" 
             trend="To Pay" 
             description="Pending settlements"
+            onClick={() => handleActionClick('settle')}
           />
           <div 
             onClick={() => navigate('/pro')}

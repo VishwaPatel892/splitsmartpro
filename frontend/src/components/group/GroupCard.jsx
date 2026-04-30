@@ -24,8 +24,8 @@ export default function GroupCard({ group, index = 0, onDelete, isCreator }) {
 
   return (
     <div
-      className={`relative rounded-2xl border bg-gradient-to-br ${gradient} p-5 flex flex-col gap-4
-        hover:scale-[1.02] hover:shadow-xl transition-all duration-200 group cursor-pointer active:scale-[0.98]`}
+      className={`relative rounded-3xl border bg-[#1E293B]/40 backdrop-blur-md bg-gradient-to-br ${gradient} p-6 flex flex-col gap-4 shadow-lg
+        hover:scale-[1.02] hover:shadow-2xl hover:brightness-110 transition-all duration-300 group cursor-pointer active:scale-[0.98] overflow-hidden`}
       onClick={() => navigate(`/groups/${group._id}`)}
     >
       {/* Header */}

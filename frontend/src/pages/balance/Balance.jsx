@@ -1,3 +1,4 @@
+import { formatCurrency, getCurrencySymbol } from '../../utils/currencyUtils.js';
 import { useEffect, useState, useCallback } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import {
@@ -147,8 +148,8 @@ export default function Balance() {
           <div className="rounded-2xl bg-[#1E293B] border border-[#334155] p-5 mb-6">
             <p className="text-xs font-bold text-[#64748B] uppercase tracking-widest mb-3">Your Summary</p>
             <div className="flex gap-3">
-              <StatBox label="You Owe"      value={iOwe    ? `₹${iOwe.toFixed(2)}`    : '—'} color="text-rose-300"    icon={TrendingDown} />
-              <StatBox label="You Get Back" value={iAmOwed ? `₹${iAmOwed.toFixed(2)}` : '—'} color="text-emerald-300" icon={TrendingUp}   />
+              <StatBox label="You Owe"      value={iOwe    ? `${formatCurrency(iOwe)}`    : '—'} color="text-rose-300"    icon={TrendingDown} />
+              <StatBox label="You Get Back" value={iAmOwed ? `${formatCurrency(iAmOwed)}` : '—'} color="text-emerald-300" icon={TrendingUp}   />
             </div>
 
             {/* My settlement suggestions */}

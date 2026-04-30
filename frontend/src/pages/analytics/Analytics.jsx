@@ -1,3 +1,4 @@
+import { formatCurrency, getCurrencySymbol } from '../../utils/currencyUtils.js';
 import { useState, useEffect } from 'react';
 import { 
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip as RechartsTooltip, ResponsiveContainer,
@@ -139,7 +140,7 @@ export default function Analytics() {
                   <div>
                     <h3 className="font-bold text-white text-sm mb-1">Pending Dues Reminder</h3>
                     <p className="text-xs text-[#94A3B8] leading-relaxed">
-                      You have <span className="text-amber-400 font-bold">₹2,400</span> in pending dues. Settle them soon to avoid piling up debt.
+                      You have <span className="text-amber-400 font-bold">{formatCurrency(2400)}</span> in pending dues. Settle them soon to avoid piling up debt.
                     </p>
                   </div>
                 </div>
@@ -155,7 +156,7 @@ export default function Analytics() {
                   <div>
                     <h3 className="font-bold text-white text-sm mb-1">Behavior Tip</h3>
                     <p className="text-xs text-[#94A3B8] leading-relaxed">
-                      Highest expense category is <span className="text-emerald-400 font-bold">Food</span>. Cooking at home twice a week could save you ₹3k/mo.
+                      Highest expense category is <span className="text-emerald-400 font-bold">Food</span>. Cooking at home twice a week could save you ${formatCurrency(3)}k/mo.
                     </p>
                   </div>
                 </div>
@@ -177,7 +178,7 @@ export default function Analytics() {
                 <LineChart data={MONTHLY_DATA}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#334155" vertical={false} />
                   <XAxis dataKey="name" stroke="#64748B" fontSize={12} tickLine={false} axisLine={false} />
-                  <YAxis stroke="#64748B" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(val) => `₹${val}`} />
+                  <YAxis stroke="#64748B" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(val) => `${formatCurrency(val)}`} />
                   <RechartsTooltip 
                     contentStyle={{ backgroundColor: '#0F172A', border: '1px solid #334155', borderRadius: '12px', color: '#fff' }}
                     itemStyle={{ color: '#818CF8', fontWeight: 'bold' }}
@@ -213,7 +214,7 @@ export default function Analytics() {
                   <RechartsTooltip 
                     contentStyle={{ backgroundColor: '#0F172A', border: '1px solid #334155', borderRadius: '12px', color: '#fff' }}
                     itemStyle={{ fontWeight: 'bold' }}
-                    formatter={(value) => `₹${value}`}
+                    formatter={(value) => `${formatCurrency(value)}`}
                   />
                 </PieChart>
               </ResponsiveContainer>
@@ -237,14 +238,15 @@ export default function Analytics() {
                 <BarChart data={GROUP_DATA} barSize={32}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#334155" vertical={false} />
                   <XAxis dataKey="name" stroke="#64748B" fontSize={12} tickLine={false} axisLine={false} />
-                  <YAxis stroke="#64748B" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(val) => `₹${val}`} />
+                  <YAxis stroke="#64748B" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(val) => `${formatCurrency(val)}`} />
                   <RechartsTooltip 
-                    cursor={{ fill: '#334155', opacity: 0.2 }}
-                    contentStyle={{ backgroundColor: '#0F172A', border: '1px solid #334155', borderRadius: '12px' }}
+                    cursor={{ fill: '#475569', opacity: 0.2 }}
+                    contentStyle={{ backgroundColor: '#0F172A', border: '1px solid #475569', borderRadius: '12px', color: '#F8FAFC' }}
+                    itemStyle={{ fontWeight: 'bold' }}
                   />
-                  <Legend wrapperStyle={{ fontSize: '12px', paddingTop: '20px' }} />
+                  <Legend wrapperStyle={{ fontSize: '12px', paddingTop: '20px', color: '#94A3B8' }} />
                   <Bar dataKey="spent" name="Spent" fill="#818CF8" radius={[4, 4, 0, 0]} />
-                  <Bar dataKey="limit" name="Budget Limit" fill="#334155" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="limit" name="Budget Limit" fill="#475569" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
             </div>

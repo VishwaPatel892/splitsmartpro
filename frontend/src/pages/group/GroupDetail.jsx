@@ -1,3 +1,4 @@
+import { formatCurrency, getCurrencySymbol } from '../../utils/currencyUtils.js';
 import { useEffect, useState, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
@@ -35,7 +36,7 @@ function BalanceTab({ balanceData, currentUserId, onSettleClick }) {
           <p className={`text-2xl font-black ${
             myNetBalance > 0 ? 'text-emerald-400' : myNetBalance < 0 ? 'text-rose-400' : 'text-white'
           }`}>
-            {myNetBalance > 0 ? `+ ₹${myNetBalance.toFixed(2)}` : myNetBalance < 0 ? `- ₹${Math.abs(myNetBalance).toFixed(2)}` : '₹0.00'}
+            {myNetBalance > 0 ? `+ ${formatCurrency(myNetBalance)}` : myNetBalance < 0 ? `- ${formatCurrency(Math.abs($1))}` : formatCurrency(0)}
           </p>
           <p className="text-[11px] font-medium text-[#64748B] mt-1">
             {myNetBalance > 0 ? 'You get back' : myNetBalance < 0 ? 'You owe overall' : 'You are completely settled up!'}
@@ -70,7 +71,7 @@ function BalanceTab({ balanceData, currentUserId, onSettleClick }) {
                   </span>
                 </div>
                 <div className="text-right">
-                  <p className="text-base font-black text-rose-400">₹{debt.amount.toFixed(2)}</p>
+                  <p className="text-base font-black text-rose-400">{formatCurrency(debt.amount)}</p>
                 </div>
               </div>
             ))}
@@ -91,7 +92,7 @@ function BalanceTab({ balanceData, currentUserId, onSettleClick }) {
                 <p className="text-sm font-medium text-[#E2E8F0]">{b.user._id === currentUserId ? 'You' : b.user.name}</p>
               </div>
               <p className={`text-sm font-bold ${b.netBalance > 0 ? 'text-emerald-400' : b.netBalance < 0 ? 'text-rose-400' : 'text-[#64748B]'}`}>
-                {b.netBalance > 0 ? `+₹${b.netBalance.toFixed(2)}` : b.netBalance < 0 ? `-₹${Math.abs(b.netBalance).toFixed(2)}` : '₹0.00'}
+                {b.netBalance > 0 ? `+₹${b.netBalance.toFixed(2)}` : b.netBalance < 0 ? `-₹${Math.abs(b.netBalance).toFixed(2)}` : formatCurrency(0)}
               </p>
             </div>
           ))}

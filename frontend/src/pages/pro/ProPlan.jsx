@@ -1,3 +1,4 @@
+import { formatCurrency, getCurrencySymbol } from '../../utils/currencyUtils.js';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CheckCircle2, Zap, ArrowLeft, Star, Shield, PieChart, Sparkles, Download } from 'lucide-react';
@@ -68,7 +69,7 @@ export default function ProPlan() {
             <h3 className="text-xl font-bold text-white mb-2">Basic</h3>
             <p className="text-[#94A3B8] text-sm mb-6">Perfect for small groups and casual trips.</p>
             <div className="mb-8">
-              <span className="text-4xl font-black text-white">₹0</span>
+              <span className="text-4xl font-black text-white">{formatCurrency(0)}</span>
               <span className="text-[#64748B] font-semibold">/forever</span>
             </div>
             
@@ -96,7 +97,7 @@ export default function ProPlan() {
             <h3 className="text-xl font-bold text-white mb-2">Pro</h3>
             <p className="text-indigo-200/70 text-sm mb-6">For power users who want deep insights.</p>
             <div className="mb-8">
-              <span className="text-4xl font-black text-white">₹{isAnnual ? '199' : '249'}</span>
+              <span className="text-4xl font-black text-white">{formatCurrency(isAnnual ? '199' : '249')}</span>
               <span className="text-[#64748B] font-semibold">/mo</span>
             </div>
             

@@ -1,3 +1,4 @@
+import { formatCurrency, getCurrencySymbol } from '../../utils/currencyUtils.js';
 import { useEffect, useState } from 'react';
 import { 
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
@@ -97,7 +98,7 @@ export default function AnalyticsChart() {
                   color: '#F8FAFC'
                 }}
                 itemStyle={{ color: '#6366F1', fontSize: '12px', fontWeight: 'bold' }}
-                formatter={(value) => [`₹${value.toLocaleString()}`, 'Amount']}
+                formatter={(value) => [`${formatCurrency(value)}`, 'Amount']}
               />
               <Area 
                 type="monotone" 
@@ -133,7 +134,7 @@ export default function AnalyticsChart() {
                   color: '#F8FAFC'
                 }}
                 itemStyle={{ fontSize: '12px' }}
-                formatter={(value) => [`₹${value.toLocaleString()}`, 'Spent']}
+                formatter={(value) => [`${formatCurrency(value)}`, 'Spent']}
               />
               <Legend 
                 iconType="circle" 

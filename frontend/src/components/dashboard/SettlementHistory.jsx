@@ -1,3 +1,4 @@
+import { formatCurrency, getCurrencySymbol } from '../../utils/currencyUtils.js';
 import { useEffect, useState } from 'react';
 import { CheckCircle2, ArrowRight, History, Loader2, IndianRupee } from 'lucide-react';
 import api from '../../services/api';
@@ -45,7 +46,7 @@ export default function SettlementHistory() {
                 </p>
               </div>
               <div className="text-right shrink-0">
-                <p className="text-sm font-black text-emerald-400">₹{s.amount.toFixed(2)}</p>
+                <p className="text-sm font-black text-emerald-400">{formatCurrency(s.amount)}</p>
                 <div className="flex items-center gap-1 justify-end mt-0.5">
                   <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                   <span className="text-[9px] font-black text-emerald-500/70 uppercase tracking-widest">Completed</span>

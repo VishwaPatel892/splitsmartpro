@@ -1,3 +1,4 @@
+import { formatCurrency, getCurrencySymbol } from '../../utils/currencyUtils.js';
 import { useState } from 'react';
 import { Trash2, ChevronDown, ChevronUp, Receipt } from 'lucide-react';
 import { deleteExpense } from '../../services/expenseService.js';
@@ -61,7 +62,7 @@ export default function ExpenseCard({ expense, onDeleted, currentUserId, isCreat
 
         {/* Amount */}
         <div className="text-right shrink-0">
-          <p className="text-base font-bold text-white">₹{expense.amount.toFixed(2)}</p>
+          <p className="text-base font-bold text-white">{formatCurrency(expense.amount)}</p>
         </div>
 
         {/* Actions */}
@@ -95,7 +96,7 @@ export default function ExpenseCard({ expense, onDeleted, currentUserId, isCreat
                 </div>
                 <span className="text-xs text-[#94A3B8]">{s.user?.name || 'Unknown'}</span>
               </div>
-              <span className="text-xs font-bold text-white">₹{s.amount.toFixed(2)}</span>
+              <span className="text-xs font-bold text-white">{formatCurrency(s.amount)}</span>
             </div>
           ))}
         </div>

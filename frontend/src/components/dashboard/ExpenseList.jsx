@@ -1,3 +1,4 @@
+import { formatCurrency, getCurrencySymbol } from '../../utils/currencyUtils.js';
 import { useEffect, useState } from 'react';
 import { 
   Utensils, Car, ShoppingBag, Coffee, ChevronRight, 
@@ -55,7 +56,7 @@ export default function ExpenseList() {
               </div>
             </div>
             <div className="text-right">
-              <p className="text-sm font-bold text-[#F8FAFC] group-hover:text-indigo-400 transition-colors">₹{expense.amount.toFixed(2)}</p>
+              <p className="text-sm font-bold text-[#F8FAFC] group-hover:text-indigo-400 transition-colors">{formatCurrency(expense.amount)}</p>
               <p className="text-[10px] text-indigo-400 font-bold uppercase tracking-wider group-hover:text-indigo-300 transition-colors">{expense.category}</p>
             </div>
           </div>

@@ -1,3 +1,4 @@
+import { formatCurrency, getCurrencySymbol } from '../../utils/currencyUtils.js';
 import { ArrowUpRight, ArrowDownLeft, Minus } from 'lucide-react';
 
 /**
@@ -56,7 +57,7 @@ function NetBalanceCard({ user, netBalance, isCurrentUser }) {
 
       <div className="text-right shrink-0">
         <p className={`text-base font-bold ${config.amountColor}`}>
-          {settled ? '—' : `₹${amount.toFixed(2)}`}
+          {settled ? '—' : `${formatCurrency(amount)}`}
         </p>
       </div>
     </div>
@@ -95,7 +96,7 @@ function SettlementCard({ from, to, amount, currentUserId, onSettle }) {
       <div className="flex-1 min-w-0">
         <p className="text-sm font-bold text-white">{heading}</p>
         <p className="text-xs text-[#64748B] mt-0.5">{subtext}</p>
-        <p className={`text-xl font-black mt-2 ${amountColor}`}>₹{amount.toFixed(2)}</p>
+        <p className={`text-xl font-black mt-2 ${amountColor}`}>{formatCurrency(amount)}</p>
       </div>
       
       <div className="flex items-center gap-2 shrink-0 w-full sm:w-auto">

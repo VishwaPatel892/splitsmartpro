@@ -1,12 +1,16 @@
+import { formatCurrency, getCurrencySymbol } from '../../utils/currencyUtils.js';
 import { ArrowUpRight, ArrowDownRight, Wallet } from 'lucide-react';
 import { cn } from '../../utils/cn';
 
-export default function StatCard({ title, amount, type, trend, description }) {
+export default function StatCard({ title, amount, type, trend, description, onClick }) {
   const isPositive = type === 'positive';
   const isNeutral = type === 'neutral';
 
   return (
-    <div className="bg-[#1E293B] border border-[#334155] rounded-2xl p-6 hover:border-indigo-500/50 hover:bg-[#1E293B]/80 hover:shadow-xl hover:shadow-indigo-500/5 transition-all group cursor-pointer active:scale-[0.98]">
+    <div 
+      onClick={onClick}
+      className="bg-[#1E293B] border border-[#334155] rounded-2xl p-6 hover:border-indigo-500/50 hover:bg-[#1E293B]/80 hover:shadow-xl hover:shadow-indigo-500/5 transition-all group cursor-pointer active:scale-[0.98]"
+    >
 
       <div className="flex justify-between items-start mb-4">
         <div className={cn(
@@ -28,7 +32,7 @@ export default function StatCard({ title, amount, type, trend, description }) {
       </div>
       
       <p className="text-sm font-medium text-[#94A3B8] mb-1">{title}</p>
-      <h3 className="text-2xl font-bold text-[#F8FAFC] tracking-tight">₹{amount.toLocaleString()}</h3>
+      <h3 className="text-2xl font-bold text-[#F8FAFC] tracking-tight">{formatCurrency(amount)}</h3>
       
       {description && (
         <p className="mt-2 text-xs text-[#64748B] flex items-center gap-1">

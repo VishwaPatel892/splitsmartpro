@@ -17,7 +17,14 @@ export default function Settings() {
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem('splitsmart_theme') || 'dark';
   });
-  const [currency, setCurrency] = useState('INR (₹)');
+  const [currency, setCurrency] = useState(() => localStorage.getItem('splitsmart_currency') || 'INR (₹)');
+
+  const handleCurrencyChange = (e) => {
+    const newCurrency = e.target.value;
+    setCurrency(newCurrency);
+    localStorage.setItem('splitsmart_currency', newCurrency);
+    window.location.reload();
+  };
   const [emailNotifs, setEmailNotifs] = useState(true);
   const [pushNotifs, setPushNotifs] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -121,7 +128,7 @@ export default function Settings() {
                   </div>
                   <select 
                     value={currency}
-                    onChange={(e) => setCurrency(e.target.value)}
+                    onChange={handleCurrencyChange}
                     className="px-4 py-2 rounded-xl bg-[#0F172A] border border-[#334155] text-white text-sm font-semibold focus:border-indigo-500 focus:outline-none transition-all cursor-pointer"
                   >
                     <option>INR (₹)</option>

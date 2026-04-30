@@ -1,3 +1,4 @@
+import { formatCurrency, getCurrencySymbol } from '../../utils/currencyUtils.js';
 import { useState, useEffect } from 'react';
 import { X, Receipt, DollarSign, User, Loader2, ChevronDown, Sparkles } from 'lucide-react';
 import { createExpense } from '../../services/expenseService.js';
@@ -152,7 +153,7 @@ export default function AddExpenseModal({ group, onClose, onAdded }) {
             <div>
               <label className="block text-[10px] font-bold text-[#64748B] mb-1.5 uppercase tracking-widest">How much?</label>
               <div className="relative">
-                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[#475569] font-black">₹</span>
+                <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[#475569] font-black">{getCurrencySymbol()}</span>
                 <input
                   type="number" min="0.01" step="0.01"
                   value={amount}
@@ -246,7 +247,7 @@ export default function AddExpenseModal({ group, onClose, onAdded }) {
                         <div className="w-6 h-6 rounded-full bg-[#1E293B] flex items-center justify-center text-[10px] font-bold text-white uppercase shrink-0">{(member?.name || '?')[0]}</div>
                         <span className="text-sm font-semibold text-[#E2E8F0]">{member?.name}</span>
                       </div>
-                      <span className="text-sm font-black text-white bg-[#1E293B] px-3 py-1 rounded-lg border border-[#334155]">₹{s.amount.toFixed(2)}</span>
+                      <span className="text-sm font-black text-white bg-[#1E293B] px-3 py-1 rounded-lg border border-[#334155]">{formatCurrency(s.amount)}</span>
                     </div>
                   );
                 })}
@@ -258,7 +259,7 @@ export default function AddExpenseModal({ group, onClose, onAdded }) {
                       <span className="text-sm font-semibold text-[#E2E8F0] truncate">{s.name}</span>
                     </div>
                     <div className="relative w-32 shrink-0">
-                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#64748B] text-xs font-bold">₹</span>
+                      <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#64748B] text-xs font-bold">{getCurrencySymbol()}</span>
                       <input
                         type="number" min="0" step="0.01"
                         value={s.amount}

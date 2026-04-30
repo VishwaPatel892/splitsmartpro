@@ -1,11 +1,12 @@
+import { formatCurrency, getCurrencySymbol } from '../../utils/currencyUtils.js';
 import { useState, useRef, useEffect } from 'react';
 import { Bell, Check, DollarSign, Users, Receipt, CheckCircle2 } from 'lucide-react';
 
 const DUMMY_NOTIFICATIONS = [
-  { id: 1, type: 'payment', title: 'Payment Reminder', message: 'You owe Rahul ₹500.00 for Dinner.', time: '10m ago', read: false },
-  { id: 2, type: 'expense', title: 'New Expense', message: 'Sneha added "Movie Tickets" (₹1200.00).', time: '1h ago', read: false },
+  { id: 1, type: 'payment', title: 'Payment Reminder', message: 'You owe Rahul ${formatCurrency(500)}.00 for Dinner.', time: '10m ago', read: false },
+  { id: 2, type: 'expense', title: 'New Expense', message: 'Sneha added "Movie Tickets" (${formatCurrency(1200)}.00).', time: '1h ago', read: false },
   { id: 3, type: 'group', title: 'Added to Group', message: 'You were added to "Goa Trip 2026".', time: '2h ago', read: true },
-  { id: 4, type: 'payment', title: 'Payment Received', message: 'Vishwa paid you ₹250.00.', time: '1d ago', read: true },
+  { id: 4, type: 'payment', title: 'Payment Received', message: 'Vishwa paid you ${formatCurrency(250)}.00.', time: '1d ago', read: true },
 ];
 
 export default function NotificationPanel() {

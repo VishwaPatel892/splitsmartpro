@@ -1,9 +1,22 @@
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Users, LineChart, Zap } from 'lucide-react';
+import { LayoutDashboard, Users, LineChart, Zap, Sun, Moon } from 'lucide-react';
 import NotificationPanel from './NotificationPanel.jsx';
 
 export default function Navbar() {
   const { pathname } = useLocation();
+  const [theme, setTheme] = useState(() => localStorage.getItem('splitsmart_theme') || 'dark');
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+    localStorage.setItem('splitsmart_theme', newTheme);
+    if (newTheme === 'light') {
+      document.documentElement.classList.add('light-theme');
+    } else {
+      document.documentElement.classList.remove('light-theme');
+    }
+  };
 
   const navLink = (to, label, Icon) => (
     <Link
@@ -44,8 +57,11 @@ export default function Navbar() {
           {navLink('/pro', 'Pro Plan', Zap)}
         </div>
         
-        {/* User Profile / Notifications */}
+        {/* User Profile / Notifications / Theme */}
         <div className="flex items-center gap-3 pl-4 border-l border-[#334155]">
+           <button onClick={toggleTheme} className="w-8 h-8 rounded-xl border border-[#334155] flex items-center justify-center text-[#94A3B8] hover:text-white hover:bg-[#1E293B] transition-colors" title="Toggle Theme">
+             {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+           </button>
            <NotificationPanel />
            <Link to="/settings" className="w-8 h-8 rounded-full bg-indigo-500/20 border border-indigo-500/30 flex items-center justify-center text-indigo-300 font-bold text-xs uppercase hover:bg-indigo-500/30 hover:scale-105 transition-all cursor-pointer" title="Settings">
              {user?.name ? user.name[0] : 'U'}

@@ -1,3 +1,4 @@
+import { formatCurrency, getCurrencySymbol } from '../../utils/currencyUtils.js';
 /* Left marketing / illustration panel */
 export default function LeftPanel() {
   return (
@@ -80,7 +81,7 @@ function DashboardMockup() {
         <div className="flex items-center justify-between mb-4">
           <div>
             <p className="text-xs text-[#94A3B8]">Total Balance</p>
-            <p className="text-2xl font-bold text-white mt-0.5">₹3,42,520</p>
+            <p className="text-2xl font-bold text-white mt-0.5">{formatCurrency(342520)}</p>
           </div>
           <div className="w-10 h-10 rounded-xl bg-indigo-500/20 flex items-center justify-center">
             <svg className="w-5 h-5 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -107,9 +108,9 @@ function DashboardMockup() {
 
         {/* Expense rows */}
         {[
-          { name: 'Dinner at Nobu', amount: '-₹3,840', color: 'text-red-400', avatar: '🍽️' },
-          { name: 'Uber Pool Split', amount: '+₹1,000', color: 'text-emerald-400', avatar: '🚗' },
-          { name: 'Airbnb Weekend', amount: '-₹9,600', color: 'text-red-400', avatar: '🏠' },
+          { name: 'Dinner at Nobu', amount: `- ${formatCurrency(3840)}`, color: 'text-red-400', avatar: '🍽️' },
+          { name: 'Uber Pool Split', amount: `+ ${formatCurrency(1000)}`, color: 'text-emerald-400', avatar: '🚗' },
+          { name: 'Airbnb Weekend', amount: `- ${formatCurrency(9600)}`, color: 'text-red-400', avatar: '🏠' },
         ].map(({ name, amount, color, avatar }) => (
           <div key={name} className="flex items-center justify-between py-2.5 border-t border-white/5">
             <div className="flex items-center gap-2.5">

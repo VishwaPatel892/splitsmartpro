@@ -1,3 +1,4 @@
+import { formatCurrency, getCurrencySymbol } from '../../utils/currencyUtils.js';
 import { Link } from 'react-router-dom';
 
 /* ── Inline SVG Icons ── */
@@ -51,7 +52,7 @@ function HeroDashboardMockup() {
         <div className="flex justify-between items-center mb-6">
           <div>
             <p className="text-xs text-[#94A3B8]">Total Balance</p>
-            <p className="text-3xl font-bold text-white mt-1">₹3,42,500</p>
+            <p className="text-3xl font-bold text-white mt-1">{formatCurrency(342500)}</p>
           </div>
           <div className="w-12 h-12 rounded-xl bg-indigo-500/20 flex items-center justify-center">
             <IconChart />
@@ -68,9 +69,9 @@ function HeroDashboardMockup() {
         {/* Expenses */}
         <div className="space-y-4">
           {[
-            { name: 'Goa Trip Flights', amount: '-₹18,500', color: 'text-red-400', avatar: '✈️' },
-            { name: 'Dinner at Taj', amount: '-₹6,200', color: 'text-red-400', avatar: '🍽️' },
-            { name: 'Rahul Paid You', amount: '+₹4,000', color: 'text-emerald-400', avatar: '💸' },
+            { name: 'Goa Trip Flights', amount: `- ${formatCurrency(18500)}`, color: 'text-red-400', avatar: '✈️' },
+            { name: 'Dinner at Taj', amount: `- ${formatCurrency(6200)}`, color: 'text-red-400', avatar: '🍽️' },
+            { name: 'Rahul Paid You', amount: `+ ${formatCurrency(4000)}`, color: 'text-emerald-400', avatar: '💸' },
           ].map((item, i) => (
             <div key={i} className="flex items-center justify-between py-2 border-t border-white/5 pt-3">
               <div className="flex items-center gap-3">
@@ -91,7 +92,7 @@ function HeroDashboardMockup() {
       
       <div className="absolute -bottom-8 -left-8 animate-fade-up flex items-center gap-3 rounded-xl border border-red-500/30 bg-[#2A0F17]/90 backdrop-blur-md px-4 py-3 shadow-xl" style={{ animationDelay: '0.4s' }}>
         <span className="text-xl">💳</span>
-        <span className="text-sm font-medium text-red-300">You owe ₹450</span>
+        <span className="text-sm font-medium text-red-300">You owe ${formatCurrency(450)}</span>
       </div>
     </div>
   );

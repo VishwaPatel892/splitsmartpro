@@ -1,3 +1,4 @@
+import { formatCurrency, getCurrencySymbol } from '../../utils/currencyUtils.js';
 import { useEffect, useState } from 'react';
 import { TrendingUp, Sparkles, ChevronRight, AlertCircle, Loader2 } from 'lucide-react';
 import { getUserInsights } from '../../services/insightService.js';
@@ -72,7 +73,7 @@ export default function Insights() {
           <div className="pt-2">
             <div className="p-4 rounded-xl bg-indigo-600/10 border border-indigo-500/20">
                <p className="text-[10px] font-bold text-indigo-300 uppercase tracking-widest mb-1">Total Spending Share</p>
-               <h4 className="text-xl font-bold text-white">₹{data.totalSpending.toLocaleString()}</h4>
+               <h4 className="text-xl font-bold text-white">{formatCurrency(data.totalSpending)}</h4>
             </div>
           </div>
         )}
