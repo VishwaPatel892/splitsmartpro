@@ -3,6 +3,7 @@ import AppRoutes from './routes/AppRoutes.jsx';
 import BottomNav from './components/layout/BottomNav.jsx';
 import ToastProvider from './components/common/Toast.jsx';
 import ErrorBoundary from './components/common/ErrorBoundary.jsx';
+import AIAssistant from './components/common/AIAssistant.jsx';
 
 export default function App() {
   // Restore persisted theme on mount
@@ -22,8 +23,9 @@ export default function App() {
       <div className="pb-20 sm:pb-0">
         <AppRoutes />
         <BottomNav />
-        {/* Global toast notification system */}
+        {/* Global components */}
         <ToastProvider />
+        <AIAssistant />
       </div>
     </ErrorBoundary>
   );
