@@ -75,7 +75,7 @@ export default function AddExpenseModal({ group, onClose, onAdded }) {
     if (!paidBy) errs.paidBy = 'Required';
     if (splitType === 'custom') {
       const sum = splits.reduce((a, s) => a + (parseFloat(s.amount) || 0), 0);
-      if (Math.abs(sum - totalAmount) > 0.01) errs.splits = `Must sum to ₹${totalAmount.toFixed(2)}`;
+      if (Math.abs(sum - totalAmount) > 0.01) errs.splits = `Must sum to ${formatCurrency(totalAmount)}`;
     }
     if (splitType === 'percentage') {
       const sum = splits.reduce((a, s) => a + (parseFloat(s.percentage) || 0), 0);
@@ -242,7 +242,7 @@ export default function AddExpenseModal({ group, onClose, onAdded }) {
                 <span className="text-[10px] font-bold text-indigo-400 uppercase tracking-widest">Instant Preview</span>
                 {splitType === 'custom' && (
                   <span className={`text-[10px] font-bold ${Math.abs(customSum - totalAmount) < 0.01 ? 'text-emerald-400' : 'text-rose-400'}`}>
-                    ₹{customSum.toFixed(2)} / ₹{totalAmount.toFixed(2)}
+                    {formatCurrency(customSum)} / {formatCurrency(totalAmount)}
                   </span>
                 )}
                 {splitType === 'percentage' && (
@@ -293,7 +293,7 @@ export default function AddExpenseModal({ group, onClose, onAdded }) {
                     </div>
                     <div className="flex items-center gap-2 shrink-0">
                       {s.percentage && totalAmount > 0 && (
-                        <span className="text-[10px] font-bold text-[#64748B]">≈ ₹{((parseFloat(s.percentage) / 100) * totalAmount).toFixed(2)}</span>
+                        <span className="text-[10px] font-bold text-[#64748B]">≈ {formatCurrency((parseFloat(s.percentage) / 100) * totalAmount)}</span>
                       )}
                       <div className="relative w-20">
                         <input

@@ -1,12 +1,13 @@
 import { formatCurrency, getCurrencySymbol } from '../../utils/currencyUtils.js';
 import { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Bell, Check, DollarSign, Users, Receipt, CheckCircle2 } from 'lucide-react';
 
 const DUMMY_NOTIFICATIONS = [
-  { id: 1, type: 'payment', title: 'Payment Reminder', message: 'You owe Rahul ${formatCurrency(500)}.00 for Dinner.', time: '10m ago', read: false },
-  { id: 2, type: 'expense', title: 'New Expense', message: 'Sneha added "Movie Tickets" (${formatCurrency(1200)}.00).', time: '1h ago', read: false },
-  { id: 3, type: 'group', title: 'Added to Group', message: 'You were added to "Goa Trip 2026".', time: '2h ago', read: true },
-  { id: 4, type: 'payment', title: 'Payment Received', message: 'Vishwa paid you ${formatCurrency(250)}.00.', time: '1d ago', read: true },
+  { id: 1, type: 'payment', title: 'Payment Reminder', message: `You owe Rahul ${formatCurrency(500)} for Dinner.`, time: '10m ago', read: false },
+  { id: 2, type: 'expense', title: 'New Expense', message: `Sneha added "Movie Tickets" (${formatCurrency(1200)}).`, time: '1h ago', read: false },
+  { id: 3, type: 'group', title: 'Added to Group', message: `You were added to "Goa Trip 2026".`, time: '2h ago', read: true },
+  { id: 4, type: 'payment', title: 'Payment Received', message: `Vishwa paid you ${formatCurrency(250)}.`, time: '1d ago', read: true },
 ];
 
 export default function NotificationPanel() {
@@ -14,6 +15,7 @@ export default function NotificationPanel() {
   const [filter, setFilter] = useState('all'); // all | payments | groups | expenses
   const [notifications, setNotifications] = useState(DUMMY_NOTIFICATIONS);
   const panelRef = useRef(null);
+  const navigate = useNavigate();
 
   // Close when clicking outside
   useEffect(() => {
@@ -127,7 +129,10 @@ export default function NotificationPanel() {
           
           {/* Footer */}
           <div className="p-3 border-t border-[#334155] bg-[#0F172A]/50 text-center">
-            <button className="text-xs font-bold text-[#64748B] hover:text-white transition-colors">
+            <button 
+              onClick={() => { setIsOpen(false); navigate('/dashboard'); }}
+              className="text-xs font-bold text-[#64748B] hover:text-white transition-colors"
+            >
               View All Activity
             </button>
           </div>

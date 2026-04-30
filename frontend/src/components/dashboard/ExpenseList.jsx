@@ -15,7 +15,7 @@ const CATEGORY_ICONS = {
   Rent: <Wallet className="w-4 h-4" />,
 };
 
-export default function ExpenseList() {
+export default function ExpenseList({ refreshKey }) {
   const [expenses, setExpenses] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -25,7 +25,7 @@ export default function ExpenseList() {
       .then(res => setExpenses(res.data))
       .catch(() => setExpenses([]))
       .finally(() => setLoading(false));
-  }, []);
+  }, [refreshKey]);
 
   return (
     <div className="bg-[#1E293B] border border-[#334155] rounded-2xl p-6 flex flex-col h-full">

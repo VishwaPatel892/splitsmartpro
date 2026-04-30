@@ -4,7 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import {
   ArrowLeft, Users, Copy, Check, Trash2, Plus, Receipt,
   Crown, Loader2, AlertTriangle, TrendingUp, Scale, Clock, 
-  ArrowRight, CreditCard, ChevronRight, Share2, SplitSquareHorizontal
+  ArrowRight, CreditCard, ChevronRight, Share2, SplitSquareHorizontal, UserPlus
 } from 'lucide-react';
 import Navbar from '../../components/layout/Navbar.jsx';
 import ExpenseCard from '../../components/expense/ExpenseCard.jsx';
@@ -92,7 +92,7 @@ function BalanceTab({ balanceData, currentUserId, onSettleClick }) {
                 <p className="text-sm font-medium text-[#E2E8F0]">{b.user._id === currentUserId ? 'You' : b.user.name}</p>
               </div>
               <p className={`text-sm font-bold ${b.netBalance > 0 ? 'text-emerald-400' : b.netBalance < 0 ? 'text-rose-400' : 'text-[#64748B]'}`}>
-                {b.netBalance > 0 ? `+₹${b.netBalance.toFixed(2)}` : b.netBalance < 0 ? `-₹${Math.abs(b.netBalance).toFixed(2)}` : formatCurrency(0)}
+                {b.netBalance > 0 ? `+ ${formatCurrency(b.netBalance)}` : b.netBalance < 0 ? `- ${formatCurrency(Math.abs(b.netBalance))}` : formatCurrency(0)}
               </p>
             </div>
           ))}
@@ -108,14 +108,14 @@ function ActivityTab({ expenses, settlements, currentUserId }) {
       id: e._id,
       type: 'expense',
       date: new Date(e.createdAt),
-      text: `${e.paidBy._id === currentUserId ? 'You' : e.paidBy.name} added ₹${e.amount.toFixed(2)} for ${e.title}`,
+      text: `${e.paidBy._id === currentUserId ? 'You' : e.paidBy.name} added ${formatCurrency(e.amount)} for ${e.title}`,
       tag: e.splitType
     })),
     ...settlements.map(s => ({
       id: s._id,
       type: 'settlement',
       date: new Date(s.createdAt),
-      text: `${s.fromUser._id === currentUserId ? 'You' : s.fromUser.name} settled ₹${s.amount.toFixed(2)} with ${s.toUser._id === currentUserId ? 'You' : s.toUser.name}`,
+      text: `${s.fromUser._id === currentUserId ? 'You' : s.fromUser.name} settled ${formatCurrency(s.amount)} with ${s.toUser._id === currentUserId ? 'You' : s.toUser.name}`,
     }))
   ].sort((a, b) => b.date - a.date);
 
@@ -271,9 +271,6 @@ export default function GroupDetail() {
             <div className="flex-1">
               <div className="flex items-center gap-3 mb-2">
                 <h1 className="text-3xl sm:text-4xl font-black text-white tracking-tight">{group.name}</h1>
-                <button onClick={handleCopyCode} className="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-[#94A3B8] transition-colors" title="Copy Invite Code">
-                  {copied ? <Check className="w-4 h-4 text-emerald-400" /> : <Share2 className="w-4 h-4" />}
-                </button>
               </div>
               <p className="text-[#94A3B8] text-sm max-w-lg leading-relaxed mb-6">
                 {group.description || 'No description provided.'}
@@ -295,13 +292,21 @@ export default function GroupDetail() {
                 <span className="text-xs font-semibold text-[#64748B] px-3 py-1 rounded-full bg-[#0F172A] border border-[#334155]">
                   {group.members.length} members
                 </span>
+                
+                <button 
+                  onClick={handleCopyCode} 
+                  className="flex items-center gap-2 text-xs font-bold text-indigo-400 bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/20 px-3 py-1.5 rounded-full transition-colors active:scale-95 ml-2"
+                >
+                  {copied ? <Check className="w-3.5 h-3.5" /> : <UserPlus className="w-3.5 h-3.5" />}
+                  {copied ? 'Code Copied!' : 'Invite Members'}
+                </button>
               </div>
             </div>
 
             <div className="sm:text-right shrink-0">
               <p className="text-xs font-bold text-[#64748B] uppercase tracking-widest mb-1">Total Group Spend</p>
               <p className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-violet-400">
-                ₹{totalExpenses.toFixed(0)}
+                {formatCurrency(totalExpenses)}
               </p>
             </div>
           </div>

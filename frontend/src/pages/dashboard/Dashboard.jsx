@@ -27,6 +27,7 @@ export default function Dashboard() {
   const [isAddExpenseOpen, setIsAddExpenseOpen] = useState(false);
   const [selectedGroup, setSelectedGroup] = useState(null);
   const [actionType, setActionType] = useState(''); // 'add' or 'settle'
+  const [refreshKey, setRefreshKey] = useState(0); // Trigger global refresh
   
   const navigate = useNavigate();
 
@@ -188,15 +189,15 @@ export default function Dashboard() {
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <ExpenseList />
-              <SettlementHistory />
+              <ExpenseList refreshKey={refreshKey} />
+              <SettlementHistory refreshKey={refreshKey} />
             </div>
           </div>
 
           {/* Right Column (Activity & Groups) */}
           <div className="lg:col-span-4 flex flex-col gap-8">
-            <GroupList />
-            <ActivityFeed />
+            <GroupList refreshKey={refreshKey} />
+            <ActivityFeed refreshKey={refreshKey} />
           </div>
 
         </div>
@@ -218,8 +219,9 @@ export default function Dashboard() {
           group={selectedGroup}
           onClose={() => setIsAddExpenseOpen(false)}
           onAdded={() => {
-            // Refresh summary after adding expense
+            // Refresh summary and all child components
             getUserSummary().then(setSummary);
+            setRefreshKey(prev => prev + 1);
           }}
         />
       )}
