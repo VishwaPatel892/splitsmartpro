@@ -22,10 +22,11 @@ export default function StatCard({ title, amount, type, trend, description, onCl
         </div>
         {trend && (
           <div className={cn(
-            "flex items-center gap-1 text-xs font-bold px-2 py-1 rounded-lg",
-            trend.startsWith('+') ? "bg-emerald-500/10 text-emerald-400" : "bg-rose-500/10 text-rose-400"
+            "flex items-center gap-1 text-[10px] uppercase tracking-widest font-bold px-2.5 py-1 rounded-md",
+            isNeutral ? "bg-[#334155] text-[#94A3B8]" : 
+            isPositive ? "bg-emerald-500/10 text-emerald-400" : "bg-rose-500/10 text-rose-400"
           )}>
-            {trend.startsWith('+') ? <ArrowUpRight className="w-3 h-3" /> : <ArrowDownRight className="w-3 h-3" />}
+            {isPositive ? <ArrowUpRight className="w-3 h-3" /> : !isNeutral ? <ArrowDownRight className="w-3 h-3" /> : null}
             {trend}
           </div>
         )}
