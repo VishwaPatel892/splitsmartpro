@@ -11,10 +11,9 @@ export default function NotificationPanel() {
   const navigate = useNavigate();
 
   const DUMMY_NOTIFICATIONS = [
-    { id: 1, type: 'payment', title: 'Payment Reminder', message: `You owe Rahul ${formatCurrency(500)} for Dinner.`, time: '10m ago', read: false },
-    { id: 2, type: 'expense', title: 'New Expense', message: `Sneha added "Movie Tickets" (${formatCurrency(1200)}).`, time: '1h ago', read: false },
-    { id: 3, type: 'group', title: 'Added to Group', message: `You were added to "Goa Trip 2026".`, time: '2h ago', read: true },
-    { id: 4, type: 'payment', title: 'Payment Received', message: `Vishwa paid you ${formatCurrency(250)}.`, time: '1d ago', read: true },
+    { id: 1, type: 'payment', title: 'Payment Settled', message: `Rahul settled ${formatCurrency(300)}.`, time: '10m ago', read: false },
+    { id: 2, type: 'expense', title: 'New Expense', message: `New expense added in Goa Trip.`, time: '1h ago', read: false },
+    { id: 3, type: 'payment', title: 'Payment Reminder', message: `You owe ${formatCurrency(200)}.`, time: '2h ago', read: false },
   ];
 
   const [notifications, setNotifications] = useState(DUMMY_NOTIFICATIONS);

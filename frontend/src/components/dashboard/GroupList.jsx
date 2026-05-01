@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Users, ArrowRight, ChevronRight } from 'lucide-react';
+import { Search, Users, ArrowRight, ChevronRight, Filter } from 'lucide-react';
 import { getGroups } from '../../services/groupService';
 
 const GRADIENT_COLORS = [
@@ -14,6 +14,9 @@ const GRADIENT_COLORS = [
 export default function GroupList() {
   const [groups, setGroups] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filter, setFilter] = useState('active'); // active, settled
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -25,7 +28,7 @@ export default function GroupList() {
 
   return (
     <div className="bg-[#1E293B] border border-[#334155] rounded-2xl p-6 flex flex-col">
-      <div className="flex justify-between items-center mb-5">
+      <div className="flex justify-between items-center mb-4">
         <h3 className="text-base font-bold text-[#F8FAFC]">Active Groups</h3>
         <button
           onClick={() => navigate('/groups')}
@@ -33,6 +36,37 @@ export default function GroupList() {
         >
           View all <ChevronRight className="w-3.5 h-3.5" />
         </button>
+      </div>
+
+      <div className="mb-4 space-y-3">
+        {/* Search */}
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#64748B]" />
+          <input
+            type="text"
+            placeholder="Search groups..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full pl-9 pr-4 py-2 bg-[#0F172A] border border-[#334155] rounded-xl text-sm text-white focus:outline-none focus:border-indigo-500 transition-colors"
+          />
+        </div>
+        
+        {/* Filters */}
+        <div className="flex items-center gap-2">
+          <Filter className="w-3.5 h-3.5 text-[#64748B]" />
+          <button 
+            onClick={() => setFilter('active')}
+            className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg transition-colors ${filter === 'active' ? 'bg-indigo-500/20 text-indigo-400 border border-indigo-500/30' : 'bg-[#0F172A] text-[#64748B] border border-[#334155] hover:text-white'}`}
+          >
+            Active
+          </button>
+          <button 
+            onClick={() => setFilter('settled')}
+            className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-lg transition-colors ${filter === 'settled' ? 'bg-indigo-500/20 text-indigo-400 border border-indigo-500/30' : 'bg-[#0F172A] text-[#64748B] border border-[#334155] hover:text-white'}`}
+          >
+            Settled
+          </button>
+        </div>
       </div>
 
       {/* Loading */}
@@ -62,8 +96,11 @@ export default function GroupList() {
 
       {/* Group items */}
       {!loading && groups.length > 0 && (
-        <div className="flex flex-col gap-3 flex-1">
-          {groups.map((group, idx) => {
+        <div className="flex flex-col gap-3 flex-1 overflow-y-auto custom-scrollbar pr-1 max-h-[300px]">
+          {groups
+            .filter(g => g.name.toLowerCase().includes(searchQuery.toLowerCase()))
+            .filter(g => filter === 'active' ? true : false) // Mocking settled as having 0 for now since we don't have settled groups
+            .map((group, idx) => {
             const color = GRADIENT_COLORS[idx % GRADIENT_COLORS.length];
             return (
               <div
