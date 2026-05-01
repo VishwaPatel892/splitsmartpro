@@ -69,62 +69,13 @@ export default function Analytics() {
 
       <main className="max-w-6xl mx-auto px-6 pt-24 space-y-8">
         
-        {/* Header & Filters */}
+        {/* Header */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
             <h1 className="text-3xl font-black text-white tracking-tight flex items-center gap-3">
               <Activity className="w-8 h-8 text-indigo-400" /> Advanced Analytics
             </h1>
             <p className="text-[#64748B] text-sm mt-1">Deep dive into your financial habits</p>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-3">
-            {/* Category Filter */}
-            <div className="relative group cursor-pointer">
-              <select 
-                value={selectedCategory} 
-                onChange={(e) => setSelectedCategory(e.target.value)}
-                className="appearance-none outline-none flex items-center gap-2 pl-4 pr-8 py-2 rounded-xl bg-[#1E293B] border border-[#334155] hover:border-indigo-500/50 transition-colors text-sm font-semibold text-white"
-              >
-                <option value="All Categories">All Categories</option>
-                <option value="Food">Food</option>
-                <option value="Travel">Travel</option>
-                <option value="Rent">Rent</option>
-              </select>
-              <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#64748B] pointer-events-none group-hover:text-white transition-colors" />
-            </div>
-
-            {/* Group Filter */}
-            <div className="relative group cursor-pointer">
-              <select 
-                value={selectedGroup} 
-                onChange={(e) => setSelectedGroup(e.target.value)}
-                className="appearance-none outline-none flex items-center gap-2 pl-4 pr-8 py-2 rounded-xl bg-[#1E293B] border border-[#334155] hover:border-indigo-500/50 transition-colors text-sm font-semibold text-white"
-              >
-                <option value="All Groups">All Groups</option>
-                <option value="Goa Trip">Goa Trip</option>
-                <option value="Apartment">Apartment</option>
-                <option value="Weekend Party">Weekend Party</option>
-              </select>
-              <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#64748B] pointer-events-none group-hover:text-white transition-colors" />
-            </div>
-            
-            {/* Time Filter */}
-            <div className="flex items-center p-1 rounded-xl bg-[#1E293B] border border-[#334155]">
-              {['Week', 'Month', 'Year'].map(t => (
-                <button
-                  key={t}
-                  onClick={() => setTimeRange(t)}
-                  className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                    timeRange === t 
-                      ? 'bg-indigo-500 text-white shadow-md' 
-                      : 'text-[#64748B] hover:text-white'
-                  }`}
-                >
-                  {t}
-                </button>
-              ))}
-            </div>
           </div>
         </div>
 
