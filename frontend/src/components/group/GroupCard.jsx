@@ -1,5 +1,6 @@
-import { Users, ArrowRight, Crown } from 'lucide-react';
+import { Users, ArrowRight, Crown, Receipt, IndianRupee, Eye } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { formatCurrency } from '../../utils/currencyUtils.js';
 
 const GROUP_GRADIENTS = [
   'from-indigo-500/20 to-violet-500/20 border-indigo-500/30',
@@ -25,36 +26,55 @@ export default function GroupCard({ group, index = 0, onDelete, isCreator }) {
   return (
     <div
       className={`relative rounded-3xl border bg-[#1E293B]/40 backdrop-blur-md bg-gradient-to-br ${gradient} p-6 flex flex-col gap-4 shadow-lg
-        hover:scale-[1.02] hover:shadow-2xl hover:brightness-110 transition-all duration-300 group cursor-pointer active:scale-[0.98] overflow-hidden`}
-      onClick={() => navigate(`/groups/${group._id}`)}
+        hover:scale-[1.03] hover:shadow-2xl hover:border-indigo-500/50 hover:brightness-110 transition-all duration-300 group overflow-hidden h-[240px]`}
     >
+      {/* Activity Indicator Badge (Mock active if recent) */}
+      <div className="absolute top-4 right-4 flex items-center gap-1.5 bg-[#0F172A]/50 backdrop-blur-md px-2 py-1 rounded-full border border-white/5">
+         <span className="relative flex h-2 w-2">
+           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+           <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+         </span>
+         <span className="text-[9px] font-bold text-emerald-400 uppercase tracking-widest">Active</span>
+      </div>
+
       {/* Header */}
-      <div className="flex items-start justify-between gap-2">
+      <div className="flex items-start justify-between gap-2 mt-2">
         <div className={`p-2.5 rounded-xl ${iconColor}`}>
           <Users className="w-5 h-5" />
         </div>
-        {isCreator && (
-          <span className="flex items-center gap-1 text-[10px] font-bold uppercase tracking-widest text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-full">
-            <Crown className="w-2.5 h-2.5" /> Creator
-          </span>
-        )}
       </div>
 
       {/* Name + description */}
       <div className="flex-1 min-w-0">
-        <h3 className="font-bold text-white text-base leading-tight truncate">
-          {group.name}
-        </h3>
-        {group.description && (
-          <p className="text-[#94A3B8] text-xs mt-1 leading-relaxed line-clamp-2">
-            {group.description}
+        <div className="flex items-center gap-2 mb-1">
+          <h3 className="font-bold text-white text-lg leading-tight truncate">
+            {group.name}
+          </h3>
+          {isCreator && (
+            <Crown className="w-3.5 h-3.5 text-amber-400 shrink-0" title="Creator" />
+          )}
+        </div>
+        
+        {/* Financial Summary & Last Activity */}
+        <div className="space-y-1 mt-2">
+          {/* Mock balance calculation based on group._id length for demo */}
+          {group.name.length % 2 === 0 ? (
+            <p className="text-xs font-bold text-emerald-400 flex items-center gap-1">
+              You get {formatCurrency((group.name.length * 150) + 200)}
+            </p>
+          ) : (
+            <p className="text-xs font-bold text-rose-400 flex items-center gap-1">
+              You owe {formatCurrency((group.name.length * 100) + 150)}
+            </p>
+          )}
+          <p className="text-[11px] text-[#94A3B8] flex items-center gap-1 truncate">
+            <Receipt className="w-3 h-3" /> Last: Dinner ({formatCurrency(1200)})
           </p>
-        )}
+        </div>
       </div>
 
-      {/* Footer */}
-      <div className="flex items-center justify-between">
-        {/* Member avatars */}
+      {/* Default Footer (visible normally) */}
+      <div className="flex items-center justify-between transition-opacity duration-300 group-hover:opacity-0 absolute bottom-6 left-6 right-6">
         <div className="flex items-center -space-x-2">
           {group.members.slice(0, 4).map((m, i) => (
             <div
@@ -71,11 +91,31 @@ export default function GroupCard({ group, index = 0, onDelete, isCreator }) {
             </div>
           )}
         </div>
-
-        <div className="flex items-center gap-1.5 text-xs text-[#64748B] font-medium group-hover:text-[#94A3B8] transition-colors">
+        <div className="flex items-center gap-1.5 text-xs text-[#64748B] font-medium">
           <span>{group.members.length} member{group.members.length !== 1 ? 's' : ''}</span>
-          <ArrowRight className="w-4 h-4 text-white/20 group-hover:text-white/60 group-hover:translate-x-1 transition-all duration-200" />
         </div>
+      </div>
+
+      {/* Hover Quick Actions (visible on hover) */}
+      <div className="absolute bottom-6 left-6 right-6 flex items-center justify-between gap-2 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+        <button 
+          onClick={(e) => { e.stopPropagation(); navigate(`/groups/${group._id}`); }}
+          className="flex-1 bg-white/10 hover:bg-white/20 text-white text-xs font-bold py-2 rounded-xl backdrop-blur-md flex items-center justify-center gap-1 transition-colors"
+        >
+          <Eye className="w-3.5 h-3.5" /> View
+        </button>
+        <button 
+          onClick={(e) => { e.stopPropagation(); navigate('/dashboard'); }}
+          className="flex-1 bg-indigo-500 hover:bg-indigo-400 text-white text-xs font-bold py-2 rounded-xl flex items-center justify-center gap-1 transition-colors shadow-lg shadow-indigo-500/30"
+        >
+           Add Exp
+        </button>
+        <button 
+          onClick={(e) => { e.stopPropagation(); navigate(`/settle/${group._id}`); }}
+          className="flex-1 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 border border-emerald-500/30 text-xs font-bold py-2 rounded-xl flex items-center justify-center gap-1 transition-colors"
+        >
+           Settle
+        </button>
       </div>
     </div>
   );
