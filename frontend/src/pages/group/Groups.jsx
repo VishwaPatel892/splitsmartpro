@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback, useMemo } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Plus, Users, Hash, RefreshCw, Search, TrendingUp, Sparkles, Receipt, CheckCircle, ArrowRight, Wallet, X } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/layout/Navbar.jsx';
@@ -122,7 +123,10 @@ export default function Groups() {
     }
   }, []);
 
-  useEffect(() => { fetchGroups(); }, [fetchGroups]);
+  const location = useLocation();
+
+  // Refetch every time the user navigates to this page (catches post-delete navigation)
+  useEffect(() => { fetchGroups(); }, [fetchGroups, location.key]);
   useEffect(() => { trackPageView('/groups', 'Groups | SplitSmart Pro'); }, []);
 
   const handleGroupCreated = (newGroup) => setGroups((prev) => [newGroup, ...prev]);
