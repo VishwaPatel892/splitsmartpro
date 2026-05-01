@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import api from '../../services/api';
 
 /* ── Icons ── */
 const MailIcon = () => (
@@ -103,28 +104,17 @@ export default function AuthCard({ tab, setTab }) {
     const payload = isLogin ? { email, password } : { name, email, password };
 
     try {
-      const response = await fetch(`http://localhost:5000${endpoint}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || (isLogin ? 'Invalid email or password.' : 'Registration failed. Please try again.'));
-      }
+      const { data } = await api.post(endpoint, payload);
 
       // Save token to localStorage
       localStorage.setItem('token', data.token);
       localStorage.setItem('user', JSON.stringify(data.user));
+      localStorage.setItem('splitsmart_user', JSON.stringify(data.user));
 
       // Redirect to dashboard
       navigate('/dashboard');
     } catch (err) {
-      setError(err.message);
+      setError(err.message || (isLogin ? 'Invalid email or password.' : 'Registration failed. Please try again.'));
     } finally {
       setLoading(false);
     }
