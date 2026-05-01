@@ -342,6 +342,7 @@ export default function Analytics() {
               </ResponsiveContainer>
             </div>
           </div>
+          </div>
         )}
       </main>
     </div>
