@@ -113,15 +113,23 @@ export default function Dashboard() {
             <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
             <p className="text-[#94A3B8] mt-1">Welcome back, here's what's happening with your finances.</p>
           </div>
-          <button 
-            onClick={() => window.location.reload()}
-            className="flex items-center gap-2 text-xs font-bold text-[#64748B] uppercase tracking-widest bg-[#1E293B] border border-[#334155] rounded-xl px-4 py-2 hover:border-indigo-500/50 hover:text-[#F8FAFC] transition-all cursor-pointer group active:scale-95"
-          >
-            Refresh Dashboard
-            <svg className="w-3 h-3 ml-1 group-hover:rotate-180 transition-transform duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-            </svg>
-          </button>
+          <div className="flex flex-wrap gap-3">
+            <button 
+              onClick={() => handleActionClick('add')}
+              className="flex items-center gap-2 text-sm font-bold text-white bg-indigo-600 rounded-xl px-4 py-2 hover:bg-indigo-500 transition-all cursor-pointer shadow-lg shadow-indigo-500/20 active:scale-95"
+            >
+              + Add Expense
+            </button>
+            <button 
+              onClick={() => window.location.reload()}
+              className="flex items-center gap-2 text-xs font-bold text-[#64748B] uppercase tracking-widest bg-[#1E293B] border border-[#334155] rounded-xl px-4 py-2 hover:border-indigo-500/50 hover:text-[#F8FAFC] transition-all cursor-pointer group active:scale-95"
+            >
+              Refresh Dashboard
+              <svg className="w-3 h-3 ml-1 group-hover:rotate-180 transition-transform duration-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+            </button>
+          </div>
         </div>
 
         {/* Quick Stats Grid */}
@@ -134,7 +142,7 @@ export default function Dashboard() {
             description="Across all groups"
           />
           <StatCard 
-            title="You Are Owed" 
+            title="Total You Get" 
             amount={summary?.totalOwedToUser || 0} 
             type="positive" 
             trend="Collect" 
@@ -142,7 +150,7 @@ export default function Dashboard() {
             onClick={() => handleActionClick('settle')}
           />
           <StatCard 
-            title="You Owe" 
+            title="Total You Owe" 
             amount={summary?.totalUserOwes || 0} 
             type="negative" 
             trend="To Pay" 
@@ -219,6 +227,7 @@ export default function Dashboard() {
           group={selectedGroup}
           onClose={() => setIsAddExpenseOpen(false)}
           onAdded={() => {
+            toast('Expense added successfully', 'success');
             // Refresh summary and all child components
             getUserSummary().then(setSummary);
             setRefreshKey(prev => prev + 1);

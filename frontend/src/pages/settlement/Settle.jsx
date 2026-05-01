@@ -179,7 +179,10 @@ export default function Settle() {
           settlement={activeSettlement}
           groupId={groupId}
           onClose={() => setActiveSettlement(null)}
-          onSettled={fetchData}
+          onSettled={() => {
+            toast('Payment settled successfully', 'success');
+            fetchData();
+          }}
         />
       )}
     </div>
