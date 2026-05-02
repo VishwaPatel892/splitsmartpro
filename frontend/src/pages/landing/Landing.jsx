@@ -1,5 +1,6 @@
 import { formatCurrency, getCurrencySymbol } from '../../utils/currencyUtils.js';
 import { Link } from 'react-router-dom';
+import PageSEO from '../../components/common/PageSEO.jsx';
 
 /* ── Inline SVG Icons ── */
 const IconCheck = () => <svg className="w-5 h-5 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>;
@@ -101,6 +102,10 @@ function HeroDashboardMockup() {
 export default function Landing() {
   return (
     <div className="min-h-screen bg-[#0F172A] font-sans text-[#F8FAFC] selection:bg-indigo-500/30">
+      <PageSEO 
+        title="Smart Expense Tracking"
+        description="SplitSmart Pro – Track, split, and settle shared expenses with friends, roommates, and teams. Fast, secure, and effortless."
+      />
       <Navbar />
 
       {/* ── HERO SECTION ── */}

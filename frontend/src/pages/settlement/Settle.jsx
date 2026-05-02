@@ -12,6 +12,7 @@ import { markGroupAsSettled, deleteGroup } from '../../services/groupService.js'
 import SettleModal from '../../components/settlement/SettleModal.jsx';
 import BalanceCard from '../../components/balance/BalanceCard.jsx';
 import { toast } from '../../components/common/Toast.jsx';
+import PageSEO from '../../components/common/PageSEO.jsx';
 
 export default function Settle() {
   const { groupId } = useParams();
@@ -114,6 +115,7 @@ export default function Settle() {
 
   return (
     <div className="min-h-screen bg-[#0F172A] text-[#F8FAFC] font-sans pb-16">
+      <PageSEO title="Settle Up" description="Clear your balances and record payments within your group." path={`/settle/${groupId}`} />
       <Navbar />
 
       <main className="max-w-2xl mx-auto px-6 pt-24">

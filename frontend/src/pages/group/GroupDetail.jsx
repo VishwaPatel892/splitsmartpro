@@ -14,6 +14,7 @@ import { getExpensesByGroup } from '../../services/expenseService.js';
 import { getGroupBalance } from '../../services/balanceService.js';
 import { getSettlements } from '../../services/settlementService.js';
 import { toast } from '../../components/common/Toast.jsx';
+import PageSEO from '../../components/common/PageSEO.jsx';
 
 function BalanceTab({ balanceData, currentUserId, onSettleClick }) {
   if (!balanceData) return <div className="py-10 text-center"><Loader2 className="w-6 h-6 animate-spin text-indigo-400 mx-auto" /></div>;
@@ -245,6 +246,11 @@ export default function GroupDetail() {
 
   return (
     <div className="min-h-screen bg-[#0F172A] text-[#F8FAFC] font-sans pb-24">
+      <PageSEO 
+        title={group?.name || 'Group Details'} 
+        description={`Manage expenses and balances for ${group?.name || 'your group'} on SplitSmart Pro.`}
+        path={`/groups/${id}`}
+      />
       <Navbar />
 
       {/* Floating Add Expense Button */}
