@@ -29,6 +29,7 @@ function Navbar() {
           <a href="#how-it-works" className="hover:text-white transition-colors">How It Works</a>
           <a href="#security" className="hover:text-white transition-colors">Security</a>
           <a href="#pricing" className="hover:text-white transition-colors">Pricing</a>
+          <a href="#faq" className="hover:text-white transition-colors">FAQ</a>
           <Link to="/pro" className="hover:text-indigo-400 font-bold transition-colors">Pro Plan</Link>
         </div>
 
@@ -173,6 +174,42 @@ export default function Landing() {
         </div>
       </section>
 
+      {/* ── BENEFITS SECTION ── */}
+      <section id="benefits" className="py-24 bg-[#0B1120] border-t border-white/5">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold">Why SplitSmart Pro Beats Spreadsheets &amp; WhatsApp Groups</h2>
+            <p className="mt-4 text-[#94A3B8]">No more mental math. No more awkward "hey, you owe me" texts. Just clarity.</p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { emoji: '🧮', title: 'Zero Manual Calculations', desc: 'Stop opening a calculator at every dinner. SplitSmart Pro handles every split — equal, percentage, or custom — automatically and instantly.' },
+              { emoji: '💬', title: 'No More Awkward Money Talks', desc: "Balances are visible to everyone. No need to chase, remind, or confront. The app does the asking so you don't have to." },
+              { emoji: '🌍', title: 'Works Across Trips & Borders', desc: 'From local dinners to international vacations, SplitSmart Pro handles multi-currency splits in the same group. No conversion apps needed.' },
+              { emoji: '⚡', title: 'Real-Time for Everyone', desc: 'Every time someone adds an expense, all group members see their updated balance instantly. No syncing, no waiting, no confusion.' },
+              { emoji: '🤖', title: 'AI That Actually Helps', desc: 'Our AI assistant analyses group spending, detects patterns, and suggests the smartest way to settle — saving you time and arguments.' },
+              { emoji: '🔒', title: 'Bank-Grade Security', desc: 'AES-256 encryption, JWT-secured sessions, and a firm no-data-selling policy. Your financial data stays private, always.' },
+            ].map((b, i) => (
+              <div key={i} className="p-6 rounded-2xl bg-[#1E293B]/40 border border-white/5 hover:border-indigo-500/20 hover:bg-[#1E293B]/70 transition-all">
+                <span className="text-3xl mb-4 block">{b.emoji}</span>
+                <h3 className="text-lg font-bold mb-2">{b.title}</h3>
+                <p className="text-[#94A3B8] text-sm leading-relaxed">{b.desc}</p>
+              </div>
+            ))}
+          </div>
+          {/* Mid-page CTA */}
+          <div className="mt-16 text-center">
+            <p className="text-[#94A3B8] mb-6 text-lg">Ready to stop the back-and-forth?</p>
+            <Link
+              to="/login"
+              className="inline-block bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-4 px-10 rounded-xl shadow-lg shadow-indigo-500/25 transition-all hover:-translate-y-0.5"
+            >
+              Start Splitting Now — It's Free
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* ── HOW IT WORKS ── */}
       <section id="how-it-works" className="py-24 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
@@ -305,6 +342,55 @@ const verifyEncryption = async (payload) => {
               </ul>
               <Link to="/login" className="block text-center w-full bg-white/10 hover:bg-white/20 font-semibold py-3 rounded-xl transition-colors">Contact Sales</Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── FAQ SECTION ── */}
+      <section id="faq" className="py-24 bg-[#0B1120] border-t border-white/5">
+        <div className="max-w-3xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold">Frequently Asked Questions</h2>
+            <p className="mt-4 text-[#94A3B8]">Everything you need to know about splitting expenses smarter.</p>
+          </div>
+          <div className="space-y-4">
+            {[
+              {
+                q: 'What is the best expense splitter app in 2026?',
+                a: 'SplitSmart Pro is widely considered the most powerful free expense splitter app available. It combines AI-powered insights, automatic debt simplification, multi-currency support, and a modern dashboard — all in one free tool. Unlike Splitwise, core features like debt simplification are free, not locked behind a paywall.',
+              },
+              {
+                q: 'How do I split expenses with friends easily?',
+                a: 'Create a free SplitSmart Pro group, add your friends via invite link, and start logging expenses. The app automatically calculates each person\'s share — equal, percentage-based, or custom. When you\'re ready to settle, it shows the minimum number of payments needed to clear all debts.',
+              },
+              {
+                q: 'Is SplitSmart Pro free to use?',
+                a: 'Yes — SplitSmart Pro has a generous free plan that includes unlimited expense tracking, up to 3 active groups, and smart settlements. The Pro plan ($5/month) unlocks AI spending insights, advanced analytics, unlimited groups, and CSV/PDF export.',
+              },
+              {
+                q: 'Can I use SplitSmart Pro for international trips with multiple currencies?',
+                a: 'Absolutely. SplitSmart Pro supports 50+ currencies within the same group. Each member can add expenses in their local currency, and the app handles conversion and reconciliation automatically — making it the ideal group expense tracker for international travelers.',
+              },
+              {
+                q: 'Do my friends need to create an account or install an app?',
+                a: 'No download required. Friends can join your group via a shared invite link and use SplitSmart Pro directly in any browser — on mobile or desktop. Only the group creator needs a free account to get started.',
+              },
+              {
+                q: 'How is SplitSmart Pro different from Splitwise?',
+                a: 'SplitSmart Pro goes beyond basic bill splitting with built-in AI spending analysis, an automatic debt simplification algorithm (free — not Pro-only like Splitwise), a real-time analytics dashboard, and a modern interface designed for 2025 and beyond.',
+              },
+            ].map((item, i) => (
+              <details
+                key={i}
+                className="group rounded-2xl bg-[#1E293B]/40 border border-white/5 hover:border-indigo-500/20 transition-all overflow-hidden"
+              >
+                <summary className="flex items-center justify-between px-6 py-5 cursor-pointer list-none font-semibold text-white group-open:text-indigo-400 transition-colors">
+                  {item.q}
+                  <span className="text-[#64748B] group-open:rotate-45 transition-transform text-2xl leading-none ml-4 shrink-0">+</span>
+                </summary>
+                <p className="px-6 pb-6 text-[#94A3B8] leading-relaxed text-sm">{item.a}</p>
+              </details>
+            ))}
           </div>
         </div>
       </section>
