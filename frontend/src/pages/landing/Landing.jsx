@@ -274,6 +274,62 @@ const verifyEncryption = async (payload) => {
         </div>
       </section>
 
+      {/* ── COMPARISON SECTION ── */}
+      <section id="comparison" className="py-24 relative overflow-hidden">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-indigo-600/5 rounded-full blur-[100px] pointer-events-none" />
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold">SplitSmart Pro vs Splitwise vs Spreadsheets</h2>
+            <p className="mt-4 text-[#94A3B8]">
+              Not all <strong className="text-white">bill splitting apps</strong> are created equal. Here's exactly what you gain when you choose SplitSmart Pro.
+            </p>
+          </div>
+
+          {/* Comparison Table */}
+          <div className="overflow-x-auto rounded-2xl border border-white/10">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="bg-[#1E293B] border-b border-white/10">
+                  <th className="text-left px-6 py-4 text-[#94A3B8] font-semibold">Feature</th>
+                  <th className="px-6 py-4 text-indigo-400 font-bold text-center">SplitSmart Pro</th>
+                  <th className="px-6 py-4 text-[#94A3B8] font-semibold text-center">Splitwise</th>
+                  <th className="px-6 py-4 text-[#94A3B8] font-semibold text-center">Spreadsheet</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  ['AI spending insights',          '✅ Free',        '❌ None',          '❌ None'],
+                  ['Debt simplification',           '✅ Automatic',   '⚠️ Pro only',      '❌ Manual'],
+                  ['Real-time balance updates',     '✅ Instant',     '✅ Yes',           '❌ No'],
+                  ['Multi-currency (same group)',   '✅ 50+ currencies','⚠️ Limited',     '❌ Manual'],
+                  ['Analytics dashboard',          '✅ Visual charts','⚠️ Basic',        '❌ None'],
+                  ['No download for members',      '✅ Browser only', '❌ App required',  '✅ Yes'],
+                  ['Modern UI design',             '✅ 2025 design',  '⚠️ Dated',        '❌ None'],
+                  ['Free tier',                    '✅ Generous',     '⚠️ Very limited', '✅ Yes'],
+                ].map(([feature, pro, splitwise, sheet], i) => (
+                  <tr key={i} className={`border-b border-white/5 ${i % 2 === 0 ? 'bg-[#0F172A]' : 'bg-[#1E293B]/20'} hover:bg-[#1E293B]/40 transition-colors`}>
+                    <td className="px-6 py-4 text-white font-medium">{feature}</td>
+                    <td className="px-6 py-4 text-center font-bold text-emerald-400">{pro}</td>
+                    <td className="px-6 py-4 text-center text-[#94A3B8]">{splitwise}</td>
+                    <td className="px-6 py-4 text-center text-[#94A3B8]">{sheet}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Verdict */}
+          <div className="mt-10 p-6 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-center">
+            <p className="text-indigo-200 leading-relaxed">
+              <strong className="text-white">The verdict:</strong> SplitSmart Pro is the only <strong className="text-indigo-300">group expense tracker</strong> that combines AI insights, automatic debt simplification, multi-currency support, and a modern dashboard — all on a free plan. Splitwise locks key features behind a $4/month paywall. Spreadsheets require manual effort and don't scale past 3 people.
+            </p>
+            <Link to="/login" className="inline-block mt-6 bg-indigo-600 hover:bg-indigo-500 text-white font-bold py-3 px-8 rounded-xl transition-all hover:-translate-y-0.5 shadow-lg shadow-indigo-500/25">
+              Try SplitSmart Pro Free →
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* ── TESTIMONIALS ── */}
       <section className="py-24">
         <div className="max-w-7xl mx-auto px-6">
