@@ -10,6 +10,7 @@ import BalanceCard from '../../components/balance/BalanceCard.jsx';
 import SettleModal from '../../components/settlement/SettleModal.jsx';
 import { getGroupBalance } from '../../services/balanceService.js';
 import { toast } from '../../components/common/Toast.jsx';
+import PageSEO from '../../components/common/PageSEO.jsx';
 
 /* ── Summary stat box ──────────────────────────────────────── */
 function StatBox({ label, value, color, icon: Icon }) {
@@ -98,6 +99,7 @@ export default function Balance() {
 
   return (
     <div className="min-h-screen bg-[#0F172A] text-[#F8FAFC] font-sans pb-16">
+      <PageSEO title="Group Balances" description="Check who owes whom in your group and settle debts efficiently." path={`/balance/${groupId}`} />
       <Navbar />
 
       <main className="max-w-2xl mx-auto px-6 pt-24">

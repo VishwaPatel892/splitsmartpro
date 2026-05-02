@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /dashboard
+Disallow: /groups
+Disallow: /balance
+Disallow: /settle
+Disallow: /analytics
+Disallow: /settings
+
+Sitemap: https://splitsmart.pro/sitemap.xml

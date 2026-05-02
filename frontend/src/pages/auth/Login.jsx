@@ -2,12 +2,18 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import LeftPanel from '../../components/auth/LeftPanel';
 import AuthCard from '../../components/auth/AuthCard';
+import PageSEO from '../../components/common/PageSEO.jsx';
 
 export default function Login() {
   const [tab, setTab] = useState('login'); // 'login' | 'signup'
 
   return (
     <div className="min-h-screen flex bg-[#0F172A] font-sans">
+      <PageSEO 
+        title={tab === 'login' ? 'Login' : 'Sign Up'}
+        description="Join SplitSmart Pro to start tracking and splitting expenses effortlessly."
+        path="/login"
+      />
       {/* Left – marketing panel (hidden on mobile) */}
       <div className="hidden lg:flex lg:w-1/2 xl:w-3/5">
         <LeftPanel />
