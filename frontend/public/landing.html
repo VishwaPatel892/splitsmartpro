@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SplitSmart Pro – Best Expense Splitter App with AI</title>
+  <meta name="description" content="Split expenses with friends easily using SplitSmart Pro. AI-powered group expense tracker for roommates, travelers, and teams. Free to start." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://splitsmartpro.vercel.app/landing.html" />
+  <meta property="og:title" content="SplitSmart Pro – Best Expense Splitter App with AI" />
+  <meta property="og:description" content="Track, split, and settle group expenses with friends. AI-powered. Free forever." />
+  <meta property="og:url" content="https://splitsmartpro.vercel.app/" />
+  <meta property="og:type" content="website" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "SplitSmart Pro",
+    "description": "AI-powered expense splitter and group finance manager.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Web",
+    "url": "https://splitsmartpro.vercel.app/",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "aggregateRating": { "@type": "AggregateRating", "ratingValue": "4.9", "reviewCount": "312" }
+  }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', system-ui, sans-serif; background: #0f172a; color: #f1f5f9; line-height: 1.7; }
+    a { color: #818cf8; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+    nav { background: #0f172a; border-bottom: 1px solid #1e293b; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; }
+    nav .brand { font-weight: 800; font-size: 1.2rem; color: #fff; }
+    nav .brand span { color: #818cf8; }
+    nav ul { list-style: none; display: flex; gap: 24px; font-size: 0.9rem; }
+    nav ul a { color: #94a3b8; }
+    .btn { display: inline-block; background: #4f46e5; color: #fff; font-weight: 700; padding: 12px 28px; border-radius: 10px; transition: background 0.2s; }
+    .btn:hover { background: #4338ca; text-decoration: none; }
+    .btn-outline { background: transparent; border: 2px solid #4f46e5; color: #818cf8; }
+    .btn-outline:hover { background: #4f46e5; color: #fff; }
+    section { padding: 72px 0; }
+    section + section { border-top: 1px solid #1e293b; }
+    h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 900; line-height: 1.2; color: #fff; margin-bottom: 20px; }
+    h1 em { font-style: normal; color: #818cf8; }
+    h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 800; color: #fff; margin-bottom: 16px; }
+    h3 { font-size: 1.1rem; font-weight: 700; color: #e2e8f0; margin-bottom: 8px; }
+    p { color: #94a3b8; margin-bottom: 16px; font-size: 1.05rem; }
+    strong { color: #e2e8f0; }
+    .hero { text-align: center; padding: 96px 0 72px; }
+    .hero p { max-width: 600px; margin: 0 auto 32px; font-size: 1.15rem; }
+    .hero-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 20px; }
+    .trust { color: #475569; font-size: 0.9rem; margin-top: 12px; }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; margin-top: 32px; }
+    .card { background: #1e293b; border: 1px solid #334155; border-radius: 16px; padding: 28px; }
+    .card-icon { font-size: 2rem; margin-bottom: 12px; display: block; }
+    .steps { counter-reset: step; display: grid; gap: 20px; margin-top: 32px; }
+    .step { display: flex; gap: 20px; align-items: flex-start; background: #1e293b; border-radius: 14px; padding: 24px; }
+    .step-num { counter-increment: step; background: #4f46e5; color: #fff; font-weight: 900; font-size: 1.1rem; min-width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    table { width: 100%; border-collapse: collapse; margin-top: 28px; background: #1e293b; border-radius: 14px; overflow: hidden; }
+    th { background: #0f172a; color: #94a3b8; padding: 14px 18px; font-weight: 600; text-align: left; font-size: 0.9rem; }
+    th.highlight { color: #818cf8; }
+    td { padding: 14px 18px; border-top: 1px solid #334155; font-size: 0.95rem; color: #94a3b8; }
+    td:first-child { color: #e2e8f0; font-weight: 500; }
+    td.good { color: #34d399; font-weight: 700; }
+    .faq { display: grid; gap: 16px; margin-top: 32px; }
+    details { background: #1e293b; border: 1px solid #334155; border-radius: 14px; padding: 20px 24px; }
+    details[open] { border-color: #4f46e5; }
+    summary { font-weight: 600; color: #e2e8f0; cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+    summary::after { content: '+'; font-size: 1.4rem; color: #475569; }
+    details[open] summary::after { content: '−'; color: #818cf8; }
+    details p { margin-top: 14px; margin-bottom: 0; }
+    .cta-box { text-align: center; background: linear-gradient(135deg, #1e1b4b, #1e293b); border: 1px solid #4f46e5; border-radius: 20px; padding: 60px 32px; }
+    .cta-box h2 { margin-bottom: 12px; }
+    .cta-box p { max-width: 520px; margin: 0 auto 28px; }
+    .testimonials { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; margin-top: 32px; }
+    .testimonial { background: #1e293b; border: 1px solid #334155; border-radius: 14px; padding: 24px; }
+    .stars { color: #818cf8; margin-bottom: 12px; font-size: 1rem; }
+    .author { margin-top: 16px; margin-bottom: 0; font-size: 0.88rem; }
+    .author strong { display: block; color: #e2e8f0; }
+    footer { background: #020617; border-top: 1px solid #1e293b; padding: 40px 24px; text-align: center; font-size: 0.88rem; color: #475569; }
+    footer a { color: #64748b; margin: 0 12px; }
+    footer a:hover { color: #94a3b8; }
+    @media (max-width: 600px) { .hero-btns { flex-direction: column; align-items: center; } nav ul { display: none; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="brand">SplitSmart <span>Pro</span></div>
+  <ul>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="/blog">Blog</a></li>
+  </ul>
+  <a href="/login" class="btn" style="padding:10px 20px;font-size:0.9rem;">Get Started Free</a>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="container">
+    <h1>The #1 <em>Expense Splitter App</em><br>That Ends Money Drama With Friends</h1>
+    <p>
+      Stop chasing friends for cash. SplitSmart Pro is the AI-powered
+      <strong>group expense tracker</strong> that calculates who owes what,
+      simplifies debts, and settles bills in seconds — no awkward conversations required.
+    </p>
+    <div class="hero-btns">
+      <a href="/login" class="btn">Start Splitting for Free →</a>
+      <a href="#how-it-works" class="btn btn-outline">See How It Works</a>
+    </div>
+    <p class="trust">✅ Free forever &nbsp;·&nbsp; ✅ No credit card &nbsp;·&nbsp; ✅ Works on any device</p>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section id="features">
+  <div class="container">
+    <h2>Everything You Need to <em style="color:#818cf8;">Split Expenses With Friends</em></h2>
+    <p>
+      One powerful <strong>bill splitting app</strong> built for every situation —
+      from weekend getaways to shared apartments. Here's what makes SplitSmart Pro different.
+    </p>
+
+    <div class="features-grid">
+
+      <div class="card">
+        <span class="card-icon">📁</span>
+        <h3>Group Management</h3>
+        <p>
+          Create unlimited groups for any occasion — Goa trips, apartment bills, team lunches.
+          Invite members via link. No app download needed for your friends. Your personal
+          <strong>group expense tracker</strong> is ready in under 60 seconds.
+        </p>
+      </div>
+
+      <div class="card">
+        <span class="card-icon">🧾</span>
+        <h3>Smart Expense Tracking</h3>
+        <p>
+          Add any shared expense and choose your split method: equal shares, custom amounts,
+          percentages, or itemised splits. SplitSmart Pro calculates every share instantly
+          so you can <strong>split expenses with friends</strong> exactly the way you want.
+        </p>
+      </div>
+
+      <div class="card">
+        <span class="card-icon">🤖</span>
+        <h3>AI Expense Assistant</h3>
+        <p>
+          Your built-in <strong>AI expense tracker</strong> analyses your group's spending patterns,
+          spots unusual charges, and gives personalised saving tips. It's like having
+          a personal finance advisor — for your whole group.
+        </p>
+      </div>
+
+      <div class="card">
+        <span class="card-icon">✅</span>
+        <h3>Smart Settlements</h3>
+        <p>
+          Our debt-simplification algorithm collapses complex group IOUs into the minimum number
+          of payments. Settle a group of 8 people with just 3 transactions instead of 28.
+          One tap to confirm. Done.
+        </p>
+      </div>
+
+      <div class="card">
+        <span class="card-icon">🌍</span>
+        <h3>Multi-Currency Support</h3>
+        <p>
+          Travelling internationally? Add expenses in 50+ currencies in the same group.
+          SplitSmart Pro converts and reconciles everything automatically — making it the best
+          <strong>expense splitter app</strong> for global trips.
+        </p>
+      </div>
+
+      <div class="card">
+        <span class="card-icon">📊</span>
+        <h3>Visual Analytics</h3>
+        <p>
+          Beautiful real-time charts show your group's spending by category, person, and month.
+          Understand where money goes and make smarter financial decisions together —
+          without opening a single spreadsheet.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section id="how-it-works">
+  <div class="container">
+    <h2>Up and Running in Under 60 Seconds</h2>
+    <p>
+      The simplest way to <strong>manage shared expenses</strong> —
+      no learning curve, no setup fees, no confusion.
+    </p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <h3>Create Your Group</h3>
+          <p>Sign up free and name your group — "Goa 2026", "Flat 4B", or "Weekend Crew".
+          Invite anyone via a link. No app install required for your friends.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <h3>Add Shared Expenses</h3>
+          <p>Log any expense and choose how to split: equal, percentage, or custom.
+          SplitSmart Pro updates everyone's balance instantly and notifies the group.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <h3>Settle Up Instantly</h3>
+          <p>Our AI shows each person exactly who to pay and how much — with the fewest
+          possible transactions. One tap to confirm. Balances clear. Everyone's happy.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COMPARISON ===== -->
+<section id="comparison">
+  <div class="container">
+    <h2>SplitSmart Pro vs Splitwise vs Spreadsheets</h2>
+    <p>
+      Not all <strong>bill splitting apps</strong> are equal.
+      Here's what you actually get with SplitSmart Pro.
+    </p>
+    <table>
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th class="highlight">SplitSmart Pro</th>
+          <th>Splitwise</th>
+          <th>Spreadsheet</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>AI spending insights</td><td class="good">✅ Free</td><td>❌ None</td><td>❌ None</td></tr>
+        <tr><td>Debt simplification</td><td class="good">✅ Automatic</td><td>⚠️ Pro only</td><td>❌ Manual</td></tr>
+        <tr><td>Real-time balance sync</td><td class="good">✅ Instant</td><td>✅ Yes</td><td>❌ No</td></tr>
+        <tr><td>Multi-currency (same group)</td><td class="good">✅ 50+ currencies</td><td>⚠️ Limited</td><td>❌ Manual</td></tr>
+        <tr><td>No app download for members</td><td class="good">✅ Browser only</td><td>❌ App required</td><td>✅ Yes</td></tr>
+        <tr><td>Visual analytics dashboard</td><td class="good">✅ Built-in</td><td>⚠️ Basic</td><td>❌ None</td></tr>
+        <tr><td>Free tier</td><td class="good">✅ Generous</td><td>⚠️ Very limited</td><td>✅ Yes</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ===== TESTIMONIALS ===== -->
+<section id="testimonials">
+  <div class="container">
+    <h2>Loved by 10,000+ Users Worldwide</h2>
+    <p>⭐ 4.9/5 average rating · Trusted by students, roommates &amp; travelers in 30+ countries</p>
+    <div class="testimonials">
+
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <p>"We used SplitSmart Pro for a 10-day Euro trip across 6 countries with 5 friends.
+        Different currencies, different spenders, zero drama. The AI insights were mind-blowing."</p>
+        <p class="author"><strong>Priya R.</strong> Student · Mumbai</p>
+      </div>
+
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <p>"Living with 4 roommates used to mean monthly arguments about groceries and electricity.
+        SplitSmart Pro fixed that in week one. The debt simplification is genuinely genius."</p>
+        <p class="author"><strong>Marcus T.</strong> Software Engineer · London</p>
+      </div>
+
+      <div class="testimonial">
+        <div class="stars">★★★★★</div>
+        <p>"I tried Splitwise, Excel, and WhatsApp groups. Nothing came close.
+        SplitSmart Pro is the first expense splitter app that actually feels designed for real people."</p>
+        <p class="author"><strong>Ananya K.</strong> Product Manager · Bangalore</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section id="faq">
+  <div class="container">
+    <h2>Frequently Asked Questions</h2>
+    <p>Everything you need to know about splitting expenses smarter.</p>
+    <div class="faq">
+
+      <details>
+        <summary>What is the best expense splitter app in 2026?</summary>
+        <p>SplitSmart Pro is the most powerful free <strong>expense splitter app</strong> available today.
+        It combines AI-powered insights, automatic debt simplification, multi-currency support, and a
+        modern analytics dashboard — all free. Unlike Splitwise, key features like debt simplification
+        are not locked behind a paywall.</p>
+      </details>
+
+      <details>
+        <summary>How do I split expenses with friends easily?</summary>
+        <p>Create a free SplitSmart Pro group, add your friends via invite link, and start logging expenses.
+        The app automatically calculates each person's share — equal, percentage-based, or custom.
+        When you're ready to <strong>settle expenses</strong>, it shows the minimum payments needed to clear all debts.</p>
+      </details>
+
+      <details>
+        <summary>Is SplitSmart Pro free to use?</summary>
+        <p>Yes. SplitSmart Pro has a generous free plan including unlimited expense tracking, up to 3
+        active groups, and smart settlements. The Pro plan ($5/month) adds AI insights, advanced analytics,
+        unlimited groups, and CSV/PDF export.</p>
+      </details>
+
+      <details>
+        <summary>Can I use it for international trips with multiple currencies?</summary>
+        <p>Absolutely. SplitSmart Pro supports 50+ currencies in the same group. Members can add expenses
+        in any currency and the app handles conversion automatically — making it the ideal
+        <strong>group expense tracker</strong> for international travelers.</p>
+      </details>
+
+      <details>
+        <summary>Do my friends need to install an app?</summary>
+        <p>No. Friends join via a shared invite link and use SplitSmart Pro directly in any browser —
+        mobile or desktop. Only the group creator needs a free account.</p>
+      </details>
+
+      <details>
+        <summary>How is SplitSmart Pro different from Splitwise?</summary>
+        <p>SplitSmart Pro adds built-in AI spending analysis, automatic debt simplification (free — not
+        Pro-only like Splitwise), real-time analytics charts, and a modern 2025 interface. It's the
+        better <strong>bill splitting app</strong> for users who want more than basic tracking.</p>
+      </details>
+
+    </div>
+
+    <p style="margin-top:32px;">
+      Want to learn more?
+      Read our <a href="/blog">blog</a> for guides on splitting expenses, budgeting with friends,
+      and managing group finances.
+    </p>
+  </div>
+</section>
+
+<!-- ===== FINAL CTA ===== -->
+<section>
+  <div class="container">
+    <div class="cta-box">
+      <h2>Stop the Money Drama. Start Splitting Smarter.</h2>
+      <p>
+        Join 10,000+ users who <strong>manage shared expenses</strong> without the awkwardness.
+        Takes 60 seconds to set up your first group — completely free.
+      </p>
+      <a href="/login" class="btn">Create Your Free Account →</a>
+      <p style="margin-top:16px;font-size:0.85rem;color:#475569;">
+        No credit card · Cancel anytime · Works on every device
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 SplitSmart Pro — The smartest <strong>expense splitter app</strong> for groups.</p>
+  <p style="margin-top:12px;">
+    <a href="/">Home</a>
+    <a href="/login">Login</a>
+    <a href="/pro">Pro Plan</a>
+    <a href="#faq">FAQ</a>
+    <a href="/blog">Blog</a>
+  </p>
+</footer>
+
+</body>
+</html>
