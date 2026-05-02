@@ -103,8 +103,8 @@ export default function Landing() {
   return (
     <div className="min-h-screen bg-[#0F172A] font-sans text-[#F8FAFC] selection:bg-indigo-500/30">
       <PageSEO 
-        title="Smart Expense Tracking"
-        description="SplitSmart Pro – Track, split, and settle shared expenses with friends, roommates, and teams. Fast, secure, and effortless."
+        title="Best Expense Splitter App for Friends & Groups"
+        description="Effortlessly split expenses with friends and roommates. SplitSmart Pro uses AI to track group spending and settle bills in seconds."
       />
       <Navbar />
 

@@ -2,9 +2,7 @@ User-agent: *
 Allow: /
 Disallow: /dashboard
 Disallow: /groups
-Disallow: /balance
-Disallow: /settle
-Disallow: /analytics
-Disallow: /settings
+Disallow: /expenses
+Disallow: /api
 
-Sitemap: https://splitsmart.pro/sitemap.xml
+Sitemap: https://splitsmartpro.vercel.app/sitemap.xml
