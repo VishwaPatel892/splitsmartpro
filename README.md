@@ -8,98 +8,55 @@
   <img src="https://readme-typing-svg.herokuapp.com?color=00E5FF&size=24&center=true&vCenter=true&width=600&lines=Smart+Expense+Manager;MERN+Stack+Project;Track+%7C+Split+%7C+Analyze+Expenses;Production+Ready+App" />
 </p>
 
+
 <p align="center">
-  <b>🚀 Split expenses smarter. Not harder.</b>
+  <b>Smart Expense Manager • MERN Stack • Production Ready</b>
 </p>
 
 ---
 
-<!-- BADGES -->
+## 🔗 Important Links
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Frontend-React-0ea5e9?style=for-the-badge&logo=react" />
-  <img src="https://img.shields.io/badge/Backend-Node.js-1e293b?style=for-the-badge&logo=node.js" />
-  <img src="https://img.shields.io/badge/Database-MongoDB-10b981?style=for-the-badge&logo=mongodb" />
-  <img src="https://img.shields.io/badge/Styling-TailwindCSS-38bdf8?style=for-the-badge&logo=tailwindcss" />
-  <img src="https://img.shields.io/badge/Deploy-Vercel%20%7C%20Render-6366f1?style=for-the-badge" />
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/badge/Status-Production%20Ready-22c55e?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" />
-</p>
+- 🎨 https://www.figma.com/design/8vl7farAdIv5FjltD1R1Uz/Untitled?node-id=47-2&p=f&t=kNtjCbtoGhjchql0-0
+- 🌐 Live Frontend: https://splitsmartpro.vercel.app/
+- ⚙️ Backend API: https://splitsmartpro-3.onrender.com 
+- 📬 Postman Docs: https://documenter.getpostman.com/view/50839289/2sBXqKoKuR
+- 🎥 Demo Video: https://www.youtube.com/watch?v=g9eefFw3zrw
 
 ---
 
-# 🤖 SplitSmart Pro — Expense Intelligence Platform
+## 🎯 Problem Statement
 
-> A modern **expense management system** that simplifies group finances using **automation, real-time insights, and clean UI**.
-
----
-
-## 🎥 Demo
-
-<p align="center">
-  <img src="https://via.placeholder.com/900x450.gif?text=Add+Your+App+Demo+GIF" />
-</p>
-
----
-
-## 🎯 Problem
-
-Managing shared expenses is:
-- ❌ Confusing  
-- ❌ Error-prone  
-- ❌ Lacks transparency  
-
-People struggle to track who paid what and who owes whom.
+Managing shared expenses among friends, roommates, or during trips is often confusing and error-prone.  
+People forget who paid what, manual calculations lead to mistakes, and there is no clear visibility of balances.
 
 ---
 
 ## 💡 Solution
 
-SplitSmart Pro:
-- ✅ Automates expense splitting  
-- ✅ Tracks balances in real-time  
-- ✅ Clearly shows debts  
-- ✅ Provides analytics insights  
+SplitSmart Pro provides a centralized platform that:
+
+- Automatically splits expenses  
+- Tracks balances in real-time  
+- Clearly shows who owes whom  
+- Simplifies settlements  
+
+This removes manual effort and ensures transparency.
 
 ---
 
 ## ✨ Features
 
--  Group-based expense management  
--  Automatic bill splitting  
--  Analytics dashboard (charts & trends)  
--  Settlement system  
--  Smart search & filters  
--  Dark-themed UI  
--  Notifications & activity tracking  
+- 👥 Create and manage groups  
+- 💸 Add and split expenses automatically  
+- 📊 Real-time balance calculation  
+- 💰 Settlement system  
+- 📈 Analytics dashboard (charts)  
+- 🔍 Search groups  
+- 🌙 Dark-themed UI  
+- 🔐 Secure backend APIs  
 
 ---
-
-## 🧩 Implemented Modules
-
-- ✅ Authentication-ready structure  
-- ✅ Expense calculation engine  
-- ✅ Balance tracking system  
-- ✅ Group management  
-- ✅ Analytics dashboard  
-- ✅ Responsive UI (mobile + desktop)  
-- ✅ Deployment (Vercel + Render + MongoDB Atlas)  
-
----
-
-## 🧠 System Flow
-
-```mermaid
-graph TD;
-A[User Login] --> B[Create Group];
-B --> C[Add Expense];
-C --> D[Auto Split Logic];
-D --> E[Balance Update];
-E --> F[Settlement];
-```
 
 ## 🛠️ Tech Stack
 
@@ -111,6 +68,42 @@ E --> F[Settlement];
 | Deployment | Vercel, Render                |
 
 ---
+
+## 📁 Folder Structure
+
+splitsmartpro/  
+│  
+├── frontend/ # React + Tailwind Frontend  
+│   ├── public/ # Static assets  
+│   ├── src/  
+│   │   ├── components/ # Reusable UI components  
+│   │   ├── pages/ # Pages (Dashboard, Groups, Analytics)  
+│   │   ├── layouts/ # Layouts (Navbar, Sidebar)  
+│   │   ├── hooks/ # Custom hooks  
+│   │   ├── services/ # API calls / axios setup  
+│   │   ├── context/ # Global state (Auth, Theme)  
+│   │   ├── utils/ # Helper functions  
+│   │   ├── assets/ # Images, icons  
+│   │   ├── App.jsx # Root component  
+│   │   └── main.jsx # Entry point  
+│   ├── .env # Frontend env variables  
+│   └── package.json  
+│  
+├── backend/ # Node.js + Express Backend  
+│   ├── controllers/ # Business logic  
+│   ├── models/ # Mongoose schemas  
+│   ├── routes/ # API routes  
+│   ├── middleware/ # Auth & error handling  
+│   ├── config/ # DB connection  
+│   ├── utils/ # Helper functions  
+│   ├── server.js # Entry point  
+│   ├── .env # Backend env variables  
+│   └── package.json  
+│  
+├── docs/ # Documentation (Postman, diagrams)  
+├── screenshots/ # UI screenshots/images  
+├── README.md # Project documentation  
+└── .gitignore  
 
 ## ⚙️ Installation
 
@@ -146,20 +139,9 @@ npm run dev
 | Backend  | Render         |
 | Database | MongoDB Atlas  |
 
----
-
-## 🔗 Live Links
-
-- 🌐 Frontend: https://your-vercel-link.vercel.app  
-- ⚙️ Backend: https://your-render-link.onrender.com  
 
 ---
 
-## 🎨 Figma Design
-
- https://www.figma.com/design/8vl7farAdIv5FjltD1R1Uz/Untitled?node-id=47-2&t=BeMjVdGkfRBYFbSC-1
-
----
 
 ## 📊 Benefits
 
